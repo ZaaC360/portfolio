@@ -24,6 +24,6 @@ gsap.to(".about h1", {
     end: "+=3000",
     scrub: 2,
     pin: true,
-    markers: true
+    // markers: true
   }
 });
