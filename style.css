@@ -1,8 +1,8 @@
-*{
+* {
     margin: 0px;
     padding: 0px;
     font-family: "switzer";
-}    
+}
 
 @font-face {
     font-family: "MyFont";
@@ -14,15 +14,15 @@
     src: url("./font/Switzer_Complete/Fonts/Variable/Switzer-Variable.ttf") format("truetype");
 }
 
-body{
+body {
     overflow-x: hidden;
 }
 
-header{
+header {
     position: sticky;
 }
 
-nav{
+nav {
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 8rem 0rem 8rem;
@@ -33,7 +33,7 @@ nav{
 
 
 
-.menulist{
+.menulist {
     display: flex;
     gap: 2rem;
     list-style: none;
@@ -42,7 +42,7 @@ nav{
     align-items: center;
 }
 
-.menuitem{
+.menuitem {
     display: flex;
     align-items: center;
 }
@@ -66,17 +66,17 @@ nav{
     object-fit: cover;
 }
 
-.logo img{
+.logo img {
     width: 60px;
     height: auto;
 }
 
-.about{
+.about {
     width: 100%;
     height: 100%;
 }
 
-.about h1{
+.about h1 {
     white-space: nowrap;
     text-transform: uppercase;
     text-align: center;
@@ -85,7 +85,7 @@ nav{
     font-weight: 500;
 }
 
-.letsTalk{
+.letsTalk {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -93,10 +93,18 @@ nav{
     gap: 5px;
 }
 
-.letsTalk{
-    height: 100vh;
+.letsTalk.h1 {
+    font-family: "MyFont";
+}
+
+.letsTalk {
+    height: 110vh;
     width: 100%;
-    background-color: rgb(22, 22, 22);
+    background-color: rgb(0, 0, 0);
     border-radius: 40px 40px 0px 0px;
     color: white;
+}
+
+.submitdiv {
+    justify-self: center;
 }
