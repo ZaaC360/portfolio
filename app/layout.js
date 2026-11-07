@@ -1,3 +1,4 @@
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 export const metadata = { title: "Portfolio" };

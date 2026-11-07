@@ -29,7 +29,17 @@ export default function Home() {
       </header>
 
       <section className="hero">
-        <img src="/imgs/Untitled design (8).png" alt="me" />
+        <div className="scene">
+          <div className="layer plate"></div>
+          <h1 className="layer box text-upper" aria-label="Creative Developer"><span className="stretch">Creative</span><span className="layer-dot"></span></h1>
+          <div className="layer box layer-photo">
+            <img src="/imgs/me-cutout.png" alt="me" />
+          </div>
+          <p className="layer box text-lower" aria-hidden="true">
+            <span className="dev-dark"><span className="stretch">Developer</span></span>
+            <span className="dev-light"><span className="stretch">Developer</span></span>
+          </p>
+        </div>
       </section>
 
       <section className="about">

@@ -7,6 +7,7 @@
 @font-face {
     font-family: "MyFont";
     src: url("/font/NewTitle-Variable.ttf") format("truetype");
+    font-weight: 100 900; /* variable font: use real weights instead of faked bold */
 }
 
 @font-face {
@@ -58,12 +59,133 @@ nav {
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    perspective: 1400px;
+    --box: min(80vh, 94vw);
 }
 
-.hero img {
+/* Everything inside .scene tilts together; each .layer then lifts on its own Z. */
+.scene {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+}
+
+.layer {
+    position: absolute;
+}
+
+.plate {
+    inset: 4vh 3vw;
+    background: white;
+    border-radius: 24px;
+    border: 1px solid #eee;
+}
+
+/* Upper text, photo and lower text share one square box so they line up when flat. */
+.box {
+    left: 50%;
+    top: calc(50% - var(--box) / 2);
+    width: var(--box);
+    height: var(--box);
+    margin-left: calc(var(--box) / -2);
+}
+
+.text-upper,
+.text-lower {
+    font-family: "MyFont";
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 0.8;
+    white-space: nowrap;
+}
+
+/* Size, stretch, spacing and position measured from the original poster (public/imgs/me.png):
+   CREATIVE cap height 0.483 box, top at 0.0255; DEVELOPER cap 0.349, bottom at 0.995. */
+.text-upper {
+    color: black;
+    font-size: calc(var(--box) * 0.509);
+    letter-spacing: 0.0125em;
+    padding-top: calc(var(--box) * 0.0223);
+}
+
+/* Two copies of DEVELOPER, each masked by the photo silhouette (no blend modes, they flatten 3D):
+   black outside the person (fading at the bottom), white over the person. */
+.text-lower {
+    font-size: calc(var(--box) * 0.411);
+    letter-spacing: 0.0207em;
+}
+
+.text-lower > span {
+    font-family: inherit; /* beat the global * { font-family: switzer } */
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+}
+
+/* fade gradient INTERSECT (full EXCLUDE silhouette) */
+.dev-dark {
+    color: black;
+    -webkit-mask-image: linear-gradient(to bottom, #000 70%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(#000 0 0), url("/imgs/me-cutout.png");
+    -webkit-mask-composite: source-in, xor;
+    mask-image: linear-gradient(to bottom, #000 70%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(#000 0 0), url("/imgs/me-cutout.png");
+    mask-composite: intersect, exclude;
+    /* --sil-* are set every frame by Animations.js so the silhouette follows the photo as layers split */
+    mask-size: 100% 100%, 100% 100%, var(--sil-size, 100% 100%);
+    -webkit-mask-size: 100% 100%, 100% 100%, var(--sil-size, 100% 100%);
+    mask-position: 0 0, 0 0, var(--sil-pos, 0 0);
+    -webkit-mask-position: 0 0, 0 0, var(--sil-pos, 0 0);
+}
+
+.dev-light {
+    color: rgba(255, 255, 255, 0.85);
+    -webkit-mask-image: url("/imgs/me-cutout.png");
+    mask-image: url("/imgs/me-cutout.png");
+    mask-size: var(--sil-size, 100% 100%);
+    -webkit-mask-size: var(--sil-size, 100% 100%);
+    mask-position: var(--sil-pos, 0 0);
+    -webkit-mask-position: var(--sil-pos, 0 0);
+}
+
+/* Taller letters. Inner span so the masks on .dev-* stay unscaled and aligned with the photo. */
+.stretch {
+    font-family: inherit;
+    display: inline-block;
+    transform: scaleY(1.249);
+    transform-origin: top;
+}
+
+.text-lower .stretch {
+    transform: scaleY(1.118);
+    transform-origin: bottom;
+    margin-bottom: calc(var(--box) * -0.0113);
+}
+
+.layer-photo img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    display: block;
+    /* jacket dissolves into the white plate instead of a hard cut, like the original poster */
+    -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+}
+
+.layer-dot {
+    display: inline-block;
+    width: calc(var(--box) * 0.078);
+    height: calc(var(--box) * 0.078);
+    margin-left: calc(var(--box) * 0.0216);
+    /* hangs past the word like the poster: excluded from centering */
+    margin-right: calc(var(--box) * -0.0996);
+    /* letters are stretched downward, the dot isn't: push it down onto the stretched baseline */
+    position: relative;
+    top: calc(var(--box) * 0.097);
+    border-radius: 50%;
+    background: #ffd632;
 }
 
 .logo img {
