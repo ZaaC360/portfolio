@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Animations from "./Animations";
+import ContactForm from "./ContactForm";
 
 const talkButton = {
   color: "white",
@@ -19,10 +20,10 @@ export default function Home() {
           <div className="logo"><img src="/imgs/Z.png" alt="" /></div>
           <div className="menubar">
             <ul className="menulist">
-              <li className="menuitem">About</li>
-              <li className="menuitem">Artworks</li>
-              <li className="menuitem">Stack</li>
-              <li><button className="menuitem" style={talkButton}>Let&apos;s Talk</button></li>
+              <li className="menuitem"><a href="#about">About</a></li>
+              <li className="menuitem"><a href="#artworks">Artworks</a></li>
+              <li className="menuitem"><a href="#stack">Stack</a></li>
+              <li><a href="#contact" className="menuitem" style={talkButton}>Let&apos;s Talk</a></li>
             </ul>
           </div>
         </nav>
@@ -42,35 +43,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="about">
+      <section className="about" id="about">
         <h1> Artistic coder. MERN Specialist.</h1>
       </section>
 
-      <section className="artwork"></section>
+      <section className="artwork" id="artworks"></section>
 
-      <section className="letsTalk">
+      {/* placeholder until the Stack section has content */}
+      <section className="stack" id="stack"></section>
+
+      <section className="letsTalk" id="contact">
         <h1>let&apos;s Talk</h1>
-        <form action="" method="get" className="form">
-          <div className="namediv">
-            <label htmlFor="nameinput">Your Name </label><br />
-            <input type="text" name="name" id="nameinput" required />
-          </div>
-          <div className="maildiv">
-            <label htmlFor="emailinput">Your Mail </label><br />
-            <input type="email" name="email" id="emailinput" required />
-          </div>
-          <div className="serdiv">
-            <label htmlFor="workinput">Work </label><br />
-            <input type="text" name="work" id="workinput" required />
-          </div>
-          <div className="workdesdiv">
-            <label htmlFor="workdesinput">Work Description </label><br />
-            <input type="text" name="workdescription" id="workdesinput" required />
-          </div>
-          <div className="submitdiv">
-            <input type="submit" value="SUBMIT!" />
-          </div>
-        </form>
+        <ContactForm />
       </section>
 
       <footer></footer>

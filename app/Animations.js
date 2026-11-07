@@ -52,8 +52,12 @@ function silhouetteOnLower(hero, scene, photo, lower) {
 // Renders nothing, just animates the page.
 export default function Animations() {
   useEffect(() => {
+    // Visitors who asked their OS for less motion get the static poster: no smooth scroll, no pinning.
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     // Lenis smooth scroll, driven by GSAP's ticker so ScrollTrigger stays in sync.
-    const lenis = new Lenis();
+    // anchors: nav links (#about, #contact...) glide instead of jumping.
+    const lenis = new Lenis({ anchors: true });
     lenis.on("scroll", ScrollTrigger.update);
     const tick = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(tick);
@@ -64,16 +68,25 @@ export default function Animations() {
       gsap.from(".menuitem", { y: -20, opacity: 0, stagger: 0.2, duration: 0.7, delay: 0.3 });
       gsap.from(".logo", { y: -20, opacity: 0, duration: 0.7, delay: 0.3 });
 
-      // Hero: tilt the whole scene back while the three layers lift apart:
-      // CREATIVE (bottom) -> photo -> DEVELOPER (top).
+      // Hero: tilt the scene back until every layer is edge-on (90deg) while they lift apart,
+      // so the scroll ends on a stack of thin lines: plate -> CREATIVE -> photo -> DEVELOPER.
       gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: { trigger: ".hero", start: "top top", end: "+=150%", scrub: 1, pin: true },
       })
-        .to(".scene", { rotateX: 50, rotateZ: -10, scale: 0.75 }, 0)
-        .to(".plate", { boxShadow: "0 60px 120px rgba(0,0,0,0.25)" }, 0)
-        .to(".text-upper", { z: 80 }, 0)
-        .to(".layer-photo", { z: 180, filter: "drop-shadow(0 40px 40px rgba(0,0,0,0.35))" }, 0)
+        // y re-centres the stack (z lifts it upward); near-orthographic perspective at the end
+        // keeps faces above/below eye level from peeking out, leaving only the edge lines
+        .to(".scene", { rotateX: 90, scale: 0.75, y: 110 }, 0)
+        .to(".hero", { perspective: 6000 }, 0)
+        .fromTo(".scene", { "--edge": 0 }, { "--edge": 1, duration: 0.25 }, 0.1)
+        .to(".plate", { boxShadow: "0 60px 120px rgba(0,0,0,0.25)", duration: 0.35 }, 0)
+        // last stretch: faces fade so only the edge lines remain (perspective leaves slivers otherwise)
+        .to(".plate", { backgroundColor: "rgba(255,255,255,0)", borderColor: "rgba(0,0,0,0)", boxShadow: "0 0 0 rgba(0,0,0,0)", duration: 0.15 }, 0.35)
+        .to(".stretch, .layer-dot, .layer-photo img, .dev-dark, .dev-light", { opacity: 0, duration: 0.1 }, 0.4)
+        .to(".text-upper", { z: 100 }, 0)
+        .to(".layer-photo", { z: 200 }, 0)
+        // shadow on the img, not the layer: filter on a layer would flatten its 3D edge
+        .to(".layer-photo img", { filter: "drop-shadow(0 40px 40px rgba(0,0,0,0.35))" }, 0)
         .to(".text-lower", { z: 300 }, 0);
 
       // Keep DEVELOPER's white/black split on wherever the photo actually appears behind it.
@@ -82,7 +95,8 @@ export default function Animations() {
       let last = "";
       trackMask = () => {
         const { pos, size } = silhouetteOnLower(...els);
-        if (pos + size === last) return;
+        // edge-on (90deg) the DEVELOPER plane has no area, the projection is undefined
+        if (pos.includes("NaN") || pos.includes("Infinity") || pos + size === last) return;
         last = pos + size;
         lower.style.setProperty("--sil-pos", pos);
         lower.style.setProperty("--sil-size", size);

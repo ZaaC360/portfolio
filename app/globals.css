@@ -17,6 +17,7 @@
 
 body {
     overflow-x: hidden;
+    background: #fff; /* design is white; don't inherit a dark-mode canvas */
 }
 
 header {
@@ -72,13 +73,34 @@ nav {
 
 .layer {
     position: absolute;
+    transform-style: preserve-3d;
+}
+
+/* Undersides of lifted layers would show mirrored once tilted past eye level. */
+.layer,
+.layer * {
+    backface-visibility: hidden;
+}
+
+/* Edge strip along each layer's bottom, folded 90deg out of its plane: invisible while the
+   scene is flat, faces the viewer when the scene is edge-on, so each layer reads as a line. */
+.layer::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 1px;
+    background: #111;
+    opacity: var(--edge, 0); /* tweened on .scene: hidden while flat, perspective would show slivers */
+    transform-origin: top;
+    transform: rotateX(-90deg);
 }
 
 .plate {
     inset: 4vh 3vw;
     background: white;
     border-radius: 24px;
-    border: 1px solid #eee;
 }
 
 /* Upper text, photo and lower text share one square box so they line up when flat. */
@@ -186,6 +208,19 @@ nav {
     top: calc(var(--box) * 0.097);
     border-radius: 50%;
     background: #ffd632;
+}
+
+.menulist a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Static poster for reduced motion: the giant one-line headline would otherwise just be cropped. */
+@media (prefers-reduced-motion: reduce) {
+    .about h1 {
+        white-space: normal;
+        font-size: 18vw;
+    }
 }
 
 .logo img {
