@@ -64,6 +64,7 @@ export default function Animations() {
     gsap.ticker.lagSmoothing(0);
 
     let trackMask = () => {};
+    let offDeckHint = () => {};
     const ctx = gsap.context(() => {
       gsap.from(".menuitem", { y: -20, opacity: 0, stagger: 0.2, duration: 0.7, delay: 0.3 });
       gsap.from(".logo", { y: -20, opacity: 0, duration: 0.7, delay: 0.3 });
@@ -75,14 +76,10 @@ export default function Animations() {
         scrollTrigger: { trigger: ".hero", start: "top top", end: "+=150%", scrub: 1, pin: true },
       })
         // y re-centres the stack (z lifts it upward); near-orthographic perspective at the end
-        // keeps faces above/below eye level from peeking out, leaving only the edge lines
+        // flattens each edge-on layer into a thin line
         .to(".scene", { rotateX: 90, scale: 0.75, y: 110 }, 0)
         .to(".hero", { perspective: 6000 }, 0)
-        .fromTo(".scene", { "--edge": 0 }, { "--edge": 1, duration: 0.25 }, 0.1)
         .to(".plate", { boxShadow: "0 60px 120px rgba(0,0,0,0.25)", duration: 0.35 }, 0)
-        // last stretch: faces fade so only the edge lines remain (perspective leaves slivers otherwise)
-        .to(".plate", { backgroundColor: "rgba(255,255,255,0)", borderColor: "rgba(0,0,0,0)", boxShadow: "0 0 0 rgba(0,0,0,0)", duration: 0.15 }, 0.35)
-        .to(".stretch, .layer-dot, .layer-photo img, .dev-dark, .dev-light", { opacity: 0, duration: 0.1 }, 0.4)
         .to(".text-upper", { z: 100 }, 0)
         .to(".layer-photo", { z: 200 }, 0)
         // shadow on the img, not the layer: filter on a layer would flatten its 3D edge
@@ -103,13 +100,69 @@ export default function Animations() {
       };
       gsap.ticker.add(trackMask);
 
-      gsap.to(".about h1", {
-        x: "-120%",
-        scrollTrigger: { trigger: ".about", start: "top top", end: "+=3000", scrub: 2, pin: true },
+      // slide exactly the overflow, so the last word ends at the right edge on any screen size
+      const aboutH1 = document.querySelector(".about h1");
+      gsap.to(aboutH1, {
+        x: () => -(aboutH1.scrollWidth - aboutH1.clientWidth),
+        scrollTrigger: { trigger: ".about", start: "top top", end: "+=3000", scrub: 2, pin: true, invalidateOnRefresh: true },
       });
+
+      // Selected Work: the deck flips on click/tap only (TumbleDeckShowcase clickOnly);
+      // a "Click to drop" pill follows the cursor while it is over the deck.
+      const deck = document.querySelector(".artwork .td-root");
+      const hint = document.querySelector(".deck-hint");
+      if (deck && hint) {
+        const section = document.querySelector(".artwork");
+        const onHintMove = (e) => {
+          const r = section.getBoundingClientRect();
+          hint.style.setProperty("--hx", `${e.clientX - r.left}px`);
+          hint.style.setProperty("--hy", `${e.clientY - r.top}px`);
+          hint.classList.add("is-on");
+        };
+        const onHintLeave = () => hint.classList.remove("is-on");
+        deck.addEventListener("pointermove", onHintMove);
+        deck.addEventListener("pointerleave", onHintLeave);
+        offDeckHint = () => {
+          deck.removeEventListener("pointermove", onHintMove);
+          deck.removeEventListener("pointerleave", onHintLeave);
+        };
+      }
+
+      // Stack: slabs drop in one by one (bottom first) while the tower turns, then it pulls
+      // apart into an exploded view and the numbered leader lines appear.
+      const slabs = gsap.utils.toArray(".slab");
+      const tower = document.querySelector(".tower");
+      const n = slabs.length;
+      // exploded spacing: share ~62% of the screen height between the slabs (0.75s = flat diamond,
+      // 0.85 = sin 58deg tilt), between a minimum that keeps labels apart and the 6-slab look
+      const gap = () => {
+        const s = tower.offsetWidth;
+        return gsap.utils.clamp(s * 0.14, s * 0.3, (innerHeight * 0.62 - s * 0.75) / ((n - 1) * 0.85));
+      };
+      const step = 0.55 / n; // all slabs land by ~0.55, then the explode starts at 0.6
+      const stackTl = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: { trigger: ".stack", start: "top top", end: `+=${150 + n * 20}%`, scrub: 1, pin: true, invalidateOnRefresh: true },
+      });
+      stackTl.fromTo(".tower", { "--spin": "-80deg" }, { "--spin": "-20deg", duration: 1 }, 0);
+      // the base slab is already in place, so the section never scrolls in empty
+      // opacity snaps in at the start of the fall: a half-faded slab shows the edges behind it
+      slabs.slice(1).forEach((el, i) =>
+        stackTl
+          .from(el, { z: () => tower.offsetWidth * 2.2, ease: "power2.in", duration: step }, i * step)
+          .from(el, { opacity: 0, duration: step * 0.15 }, i * step)
+      );
+      stackTl
+        .to(slabs, { z: (i) => i * gap(), ease: "power2.inOut", duration: 0.3 }, 0.6)
+        // exploded tower grows upward; slide it down by half the growth to stay centred (0.85 = sin 58deg tilt)
+        .to(".tower-wrap", { y: () => ((n - 1) * gap() * 0.85) / 2, ease: "power2.inOut", duration: 0.3 }, 0.6)
+        .fromTo(".slab-label", { opacity: 0 }, { opacity: 1, stagger: 0.15 / n, duration: 0.1 }, 0.75);
     });
+    // the headline's width is only right once its font has loaded; re-measure then
+    document.fonts.ready.then(() => ScrollTrigger.refresh());
 
     return () => {
+      offDeckHint();
       ctx.revert();
       gsap.ticker.remove(tick);
       gsap.ticker.remove(trackMask);

@@ -49,6 +49,15 @@ nav {
     align-items: center;
 }
 
+.menulist .talk {
+    color: white;
+    background-color: black;
+    border-radius: 12px;
+    font-size: 18px;
+    padding: 12px 18px;
+    line-height: 1;
+}
+
 /* .main{
     display: flex;
     flex-direction: column;
@@ -61,7 +70,7 @@ nav {
     height: 100vh;
     overflow: hidden;
     perspective: 1400px;
-    --box: min(80vh, 94vw);
+    --box: min(80vh, 84vw); /* 84vw leaves room for the dot hanging past CREATIVE */
 }
 
 /* Everything inside .scene tilts together; each .layer then lifts on its own Z. */
@@ -80,21 +89,6 @@ nav {
 .layer,
 .layer * {
     backface-visibility: hidden;
-}
-
-/* Edge strip along each layer's bottom, folded 90deg out of its plane: invisible while the
-   scene is flat, faces the viewer when the scene is edge-on, so each layer reads as a line. */
-.layer::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 100%;
-    height: 1px;
-    background: #111;
-    opacity: var(--edge, 0); /* tweened on .scene: hidden while flat, perspective would show slivers */
-    transform-origin: top;
-    transform: rotateX(-90deg);
 }
 
 .plate {
@@ -231,6 +225,7 @@ nav {
 .about {
     width: 100%;
     height: 100%;
+    overflow: hidden; /* the marquee headline is far wider than the screen */
 }
 
 .about h1 {
@@ -265,3 +260,299 @@ nav {
 .submitdiv {
     justify-self: center;
 }
+/* ---------- Selected Work: tumbling deck of project screenshots ---------- */
+.artwork {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Guide pill: follows the cursor over the deck (Animations.js sets --hx/--hy and .is-on);
+   on touch screens there is no hover, so it sits at the bottom, always shown. */
+.deck-hint {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #000;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(calc(var(--hx, 0px) + 16px), calc(var(--hy, 0px) + 16px));
+    transition: opacity 0.2s;
+}
+
+.deck-hint::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ffd632;
+}
+
+.deck-hint::after {
+    content: "Click to drop";
+}
+
+.deck-hint.is-on {
+    opacity: 1;
+}
+
+@media (hover: none) {
+    .deck-hint {
+        left: 50%;
+        top: auto;
+        bottom: 6vh;
+        opacity: 1;
+        transform: translateX(-50%);
+    }
+
+    .deck-hint::after {
+        content: "Tap to drop";
+    }
+}
+
+/* ---------- The Stack: exploded-view tower ---------- */
+.stack {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    perspective: 4000px;
+    display: grid;
+    place-items: center;
+    --s: min(30vh, 28vw); /* slab size */
+    --t: calc(var(--s) * 0.07); /* slab thickness */
+}
+
+.stack-caption {
+    position: absolute;
+    top: 6vh;
+    left: 8rem;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    z-index: 1;
+}
+
+.stack-caption span {
+    display: block;
+    margin-top: 6px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #666;
+}
+
+.stack-bg {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: "MyFont";
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 42vw;
+    line-height: 1;
+    color: #f2f2f2;
+    pointer-events: none;
+}
+
+.tower-wrap {
+    transform-style: preserve-3d;
+}
+
+/* --spin is tweened by Animations.js; labels counter-rotate with it to face the viewer */
+.tower {
+    --spin: -45deg;
+    position: relative;
+    width: var(--s);
+    height: var(--s);
+    list-style: none;
+    transform-style: preserve-3d;
+    transform: rotateX(58deg) rotateZ(var(--spin));
+}
+
+/* resting state = neatly stacked (also the reduced-motion poster); GSAP animates z from here */
+.slab {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transform: translateZ(calc(var(--i) * var(--t)));
+    background: #fff;
+    outline: 1.5px solid #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--s) * 0.02);
+}
+
+/* two side faces folded down from the near edges give each slab real thickness;
+   the front one (.slab-spine) carries the name, like a book spine */
+.slab-spine,
+.slab::after {
+    position: absolute;
+    background: #000;
+}
+
+.slab-spine {
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: var(--t);
+    transform-origin: top;
+    transform: rotateX(-90deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent; /* names only show on phones, where the side labels are hidden */
+    font-size: calc(var(--t) * 0.55);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.slab::after {
+    content: "";
+    top: 0;
+    bottom: 0;
+    right: 100%;
+    width: var(--t);
+    transform-origin: right;
+    transform: rotateY(-90deg);
+    background: #1c1c1c;
+}
+
+.slab:last-child {
+    background: #ffd632;
+}
+
+.slab-name {
+    font-family: "MyFont";
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: calc(var(--s) * 0.2);
+    line-height: 0.85;
+}
+
+.slab-role {
+    font-size: calc(var(--s) * 0.05);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+/* leader line + index off the slab's right-hand corner, turned back to face the viewer */
+.slab-label {
+    position: absolute;
+    left: 100%;
+    top: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    transform-origin: 0 0;
+    transform: rotateZ(calc(var(--spin) * -1)) rotateX(-58deg);
+}
+
+.slab-label::before {
+    content: "";
+    width: 70px;
+    height: 1px;
+    background: #000;
+}
+
+.slab-label::after {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ffd632;
+    outline: 1px solid #000;
+}
+
+/* Phones and small tablets */
+@media (max-width: 768px) {
+    nav {
+        padding: 0.75rem 1rem 0;
+    }
+
+    .logo img {
+        width: 36px;
+    }
+
+    .menulist {
+        gap: 0.9rem;
+        font-size: 14px;
+    }
+
+    .menulist .talk {
+        font-size: 14px;
+        padding: 8px 12px;
+        border-radius: 10px;
+    }
+
+    .about h1 {
+        font-size: 200px;
+    }
+
+    /* column flex: centres the headline vertically but keeps its width = screen */
+    .about {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* Poster 1.1x the desktop-fit size, centred on the screen rather than below the header */
+    .hero {
+        --box: min(88vh, 92.4vw);
+    }
+
+    .box {
+        /* hero starts below the header, so lift by its height to centre on the screen.
+           shortcut: 58px = mobile header height; update if the nav changes */
+        top: calc(50% - var(--box) / 2 - 58px);
+        /* shift left by half the dot's overhang so CREATIVE + dot sit centred together */
+        margin-left: calc(var(--box) * -0.549);
+    }
+
+    /* no room for side labels on a phone: the tower stays centred and the names
+       ride on the slab spines, which get thicker to fit the text */
+    .stack {
+        --s: min(30vh, 46vw);
+        --t: calc(var(--s) * 0.1);
+    }
+
+    .slab-label {
+        display: none;
+    }
+
+    .slab-spine {
+        color: #fff;
+    }
+
+    .stack-caption {
+        left: 1rem;
+    }
+
+
+    .letsTalk {
+        border-radius: 24px 24px 0 0;
+        padding: 0 1.25rem;
+        box-sizing: border-box;
+    }
+}
+
