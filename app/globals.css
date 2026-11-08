@@ -253,33 +253,6 @@ nav {
     overflow: hidden;
 }
 
-/* giant outlined words drifting behind everything (two copies loop seamlessly) */
-.talk-marquee {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    display: flex;
-    transform: translateY(-50%);
-    white-space: nowrap;
-    pointer-events: none;
-    animation: talk-marquee 40s linear infinite;
-}
-
-.talk-marquee span {
-    font-family: "MyFont";
-    font-weight: 500;
-    text-transform: uppercase;
-    font-size: 34vw;
-    line-height: 0.8;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.09);
-    padding-right: 0.25em;
-}
-
-@keyframes talk-marquee {
-    to { transform: translate(-50%, -50%); }
-}
-
 .talk-kicker {
     position: relative;
     font-family: ui-monospace, Menlo, Consolas, monospace;
@@ -396,12 +369,6 @@ nav {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: #bdbdbd;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .talk-marquee {
-        animation: none;
-    }
 }
 
 /* ---------- Selected Work: tumbling deck of project screenshots ---------- */
@@ -1071,7 +1038,7 @@ html {
         height: calc(var(--box) * 0.045);
         margin-left: calc(var(--box) * 0.01);
         margin-right: calc(var(--box) * -0.055);
-        top: calc(var(--box) * 0.121);
+        top: calc(var(--box) * 0.096);
     }
 
     /* no room for side labels on a phone: the tower stays centred and the names
@@ -1212,6 +1179,7 @@ html {
         width: 44px;
         height: 44px;
         border-radius: 50%;
+        overflow: hidden;
         background: #ffd632;
         font-size: 0;
     }
@@ -1223,6 +1191,7 @@ html {
         height: 34px;
         /* sit at the bottom so the stem meets the circle's lower edge */
         align-self: end;
+        margin-bottom: -2px; /* run past the edge; the button's overflow clips it to the circle */
         background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 34' fill='none' stroke='%23000' stroke-width='1.2' stroke-linejoin='round'%3E%3Cpath d='M7 34V1M1 7l6-6 6 6'/%3E%3C/svg%3E") center / contain no-repeat;
     }
 
@@ -1239,10 +1208,6 @@ html {
     .brief-row {
         display: inline;
         white-space: normal;
-    }
-
-    .talk-marquee span {
-        font-size: 60vw;
     }
 }
 

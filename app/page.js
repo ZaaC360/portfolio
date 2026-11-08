@@ -107,12 +107,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* The brief: a fill-in-the-blanks letter over a drifting "let's talk" backdrop */}
+      {/* The brief: a fill-in-the-blanks letter */}
       <section className="letsTalk" id="contact">
-        <div className="talk-marquee" aria-hidden="true">
-          <span>Let&apos;s talk — Let&apos;s talk — Let&apos;s talk — </span>
-          <span>Let&apos;s talk — Let&apos;s talk — Let&apos;s talk — </span>
-        </div>
         <h2 className="talk-kicker reveal">Let&apos;s talk · Fill in the blanks</h2>
         <ContactForm />
       </section>
