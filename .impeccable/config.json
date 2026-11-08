@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "components/ui/tumble-deck-showcase.jsx"
+        ],
+        "createdAt": "2026-11-08T07:43:48.877Z",
+        "reason": "Claude: src is assigned in paint() as pooled card slots recycle; never rendered without a src"
+      }
+    ]
+  }
+}

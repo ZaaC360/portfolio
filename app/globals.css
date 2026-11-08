@@ -237,29 +237,173 @@ nav {
     font-weight: 500;
 }
 
+/* ---------- Let's Talk: "the brief", a fill-in-the-blanks letter ---------- */
 .letsTalk {
+    position: relative;
+    min-height: 100vh;
+    padding: 14vh 8rem 12vh;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 5px;
+    gap: 5vh;
+    background: #000;
+    color: #fff;
+    border-radius: 40px 40px 0 0;
+    overflow: hidden;
 }
 
-.letsTalk.h1 {
+/* giant outlined words drifting behind everything (two copies loop seamlessly) */
+.talk-marquee {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: flex;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    pointer-events: none;
+    animation: talk-marquee 40s linear infinite;
+}
+
+.talk-marquee span {
     font-family: "MyFont";
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 34vw;
+    line-height: 0.8;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.09);
+    padding-right: 0.25em;
 }
 
-.letsTalk {
-    height: 110vh;
-    width: 100%;
-    background-color: rgb(0, 0, 0);
-    border-radius: 40px 40px 0px 0px;
-    color: white;
+@keyframes talk-marquee {
+    to { transform: translate(-50%, -50%); }
 }
 
-.submitdiv {
-    justify-self: center;
+.talk-kicker {
+    position: relative;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8a8a8a;
 }
+
+.brief {
+    position: relative;
+}
+
+.brief-line {
+    font-family: "MyFont";
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(40px, 6vw, 108px);
+    line-height: 1.08;
+}
+
+/* the blanks: underlined gaps in the sentence; typed words turn yellow */
+.brief-blank {
+    box-sizing: content-box; /* width set by ContactForm = text width + slack */
+    font: inherit;
+    font-family: "MyFont";
+    text-transform: uppercase;
+    color: #ffd632;
+    caret-color: #ffd632;
+    background: transparent;
+    border: none;
+    border-bottom: 0.05em solid #3a3a3a;
+    border-radius: 0;
+    padding: 0 0.08em;
+    margin: 0 0.04em;
+    min-width: 3ch;
+    max-width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+/* the line wrappers would otherwise get Switzer from the global `* { font-family }` rule */
+.brief-line * {
+    font-family: inherit;
+}
+
+/* desktop: the sentence is exactly two lines; ContactForm shrinks it if a line is too long */
+.brief-row {
+    display: block;
+    white-space: nowrap;
+}
+
+/* a blank and the full stop after it never split across lines */
+.brief-keep {
+    white-space: nowrap;
+}
+
+.brief-blank::placeholder {
+    color: #4a4a4a;
+}
+
+/* the suggestions list adds a dropdown arrow that would eat the blank's width */
+.brief-blank::-webkit-calendar-picker-indicator {
+    display: none !important;
+}
+
+.brief-blank:focus {
+    border-bottom-color: #ffd632;
+}
+
+.brief-blank:focus::placeholder {
+    color: #555;
+}
+
+.brief-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 6vh;
+}
+
+/* big yellow pill; Animations.js makes it lean toward the cursor (magnetic) */
+.brief-send {
+    font-family: "MyFont";
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(28px, 2.6vw, 44px);
+    line-height: 1;
+    padding: 0.55em 1.1em;
+    border: none;
+    border-radius: 999px;
+    background: #ffd632;
+    color: #000;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.brief-send:hover,
+.brief-send:focus-visible {
+    background: #fff;
+    outline: none;
+}
+
+.brief-send:disabled {
+    opacity: 0.5;
+    cursor: progress;
+}
+
+.brief-status {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #bdbdbd;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .talk-marquee {
+        animation: none;
+    }
+}
+
 /* ---------- Selected Work: tumbling deck of project screenshots ---------- */
 .artwork {
     position: relative;
@@ -483,14 +627,407 @@ nav {
     outline: 1px solid #000;
 }
 
+/* Blur reveal (Animations.js) wraps each word in a div; the global `* { font-family }`
+   rule would otherwise swap those words to Switzer instead of their block's font */
+.reveal div {
+    font-family: inherit;
+}
+
+/* ---------- Footer: reaching hands (connection) + CTA, links, sign-off ---------- */
+.site-footer {
+    position: relative;
+    background: #000;
+    color: #e6e6e6;
+    padding: 3vh 8rem 2.5vh;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    /* clip sideways only: the tilted arms may reach up over the (black) section above */
+    overflow-x: clip;
+    overflow-y: visible;
+}
+
+/* the art runs edge to edge (cancelling the footer's side padding), at the image's own
+   aspect ratio, so the arms reach in from the screen edges like the reference */
+.footer-art {
+    position: relative;
+    margin: 0 -8rem;
+    aspect-ratio: 1342 / 314;
+}
+
+/* extends 40% of the band's height above and below it, so the 15deg-tilted arms run on
+   past the band instead of being cut flat; the band (layout) itself is unchanged */
+.footer-ascii {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -40%;
+    width: 100%;
+    height: 180%; /* band + 40% above + 40% below */
+    image-rendering: pixelated;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.25)); /* soft bloom */
+}
+
+/* film grain over the whole footer */
+.site-footer::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    inset: 0 -50%;
+    opacity: 0.2;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: footer-grain 0.6s steps(4) infinite;
+}
+
+/* horizontal only: with the footer's y overflow visible, a vertical shift would add scroll */
+@keyframes footer-grain {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-6%); }
+    50% { transform: translateX(5%); }
+    75% { transform: translateX(-3%); }
+    100% { transform: translateX(0); }
+}
+
+/* the spark: a pulsing yellow dot exactly in the gap between the two fingertips
+   (measured on hands.png: 50% across, 48.5% down) */
+.footer-spark {
+    position: absolute;
+    left: 50%;
+    top: 48.5%;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    color: #ffd632;
+    text-decoration: none;
+}
+
+.footer-spark-dot {
+    position: absolute;
+    left: -6px;
+    top: -6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ffd632;
+    box-shadow: 0 0 18px 4px rgba(255, 214, 50, 0.55);
+    animation: spark-pulse 1.6s ease-in-out infinite;
+}
+
+/* a ring ripples out from the spark */
+.footer-spark-dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid #ffd632;
+    animation: spark-ring 1.6s ease-out infinite;
+}
+
+.footer-spark-label {
+    position: absolute;
+    left: 0;
+    top: 18px;
+    transform: translateX(-50%);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0.85;
+}
+
+.footer-spark:hover .footer-spark-label,
+.footer-spark:focus-visible .footer-spark-label {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+@keyframes spark-pulse {
+    50% { transform: scale(1.35); box-shadow: 0 0 28px 8px rgba(255, 214, 50, 0.7); }
+}
+
+@keyframes spark-ring {
+    from { transform: scale(1); opacity: 0.9; }
+    to { transform: scale(4.5); opacity: 0; }
+}
+
+/* caption centred under the hands */
+.footer-art-line {
+    margin-top: 1.5vh;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+}
+
+.footer-cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 3vh;
+    padding-bottom: 3vh;
+    border-bottom: 1px solid #222;
+}
+
+.footer-title {
+    font-family: "MyFont";
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(36px, 4.5vw, 80px);
+    line-height: 0.9;
+    color: #fff;
+}
+
+.footer-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    background: #fff;
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.footer-button::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ffd632;
+}
+
+.footer-button:hover,
+.footer-button:focus-visible {
+    background: #ffd632;
+}
+
+.footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    padding: 3vh 0;
+}
+
+/* .site-footer prefix: the header's bare `nav` rules (padding, xx-large text) must not leak in */
+.site-footer .footer-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* the header's nav rule sets space-between, pushing links down */
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* compact: the Navigate links sit in one row instead of a column */
+.footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+}
+
+.footer-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #6f6f6f;
+    margin-bottom: 4px;
+}
+
+.footer-text {
+    max-width: 28ch;
+    line-height: 1.5;
+    color: #bdbdbd;
+}
+
+.footer-link {
+    color: #e6e6e6;
+    text-decoration: none;
+}
+
+.footer-link:hover,
+.footer-link:focus-visible {
+    color: #000;
+    background: #fff;
+    outline: none;
+}
+
+.footer-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem 2rem;
+    flex-wrap: wrap;
+    padding-top: 2vh;
+    border-top: 1px solid #222;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+}
+
+.footer-cursor {
+    display: inline-block;
+    width: 0.6em;
+    height: 0.15em;
+    margin-left: 4px;
+    background: #ffd632;
+    animation: footer-blink 1s steps(1) infinite;
+}
+
+@keyframes footer-blink {
+    50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-footer::after,
+    .footer-cursor,
+    .footer-spark-dot,
+    .footer-spark-dot::after {
+        animation: none;
+    }
+}
+
+/* ---------- Loader: rolling counter + build log, then the dot floods and collapses ---------- */
+html.is-loading,
+html.is-loading body {
+    overflow: hidden;
+}
+
+/* keep the scrollbar's space while scrolling is locked, so nothing shifts when it unlocks
+   (the loader collapses onto the hero dot's exact position) */
+html {
+    scrollbar-gutter: stable;
+}
+
+.loader {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: #000;
+    color: #fff;
+    /* failsafe: if JavaScript never runs, get out of the way after 8s */
+    animation: loader-failsafe 0s 8s forwards;
+}
+
+@keyframes loader-failsafe {
+    to { visibility: hidden; pointer-events: none; }
+}
+
+.loader-log {
+    position: absolute;
+    left: 8rem;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+}
+
+/* the line under the counter: bright and readable from the first paint (system mono) */
+.loader-tag {
+    margin-top: 3vh;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: clamp(13px, 1.3vw, 18px);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+}
+
+.loader-pct {
+    font-family: inherit;
+    color: #ffd632;
+    margin-left: 0.6em;
+}
+
+/* build log: lines appear as each thing really finishes loading */
+.loader-log {
+    bottom: 6vh;
+    list-style: none;
+    line-height: 1.9;
+}
+
+.loader-log li {
+    font-family: inherit;
+}
+
+.loader-log b {
+    font-family: inherit;
+    font-weight: 400;
+    color: #ffd632;
+}
+
+.loader-mid {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* the giant counter + dot, like "CREATIVE." */
+.loader-num {
+    display: flex;
+    align-items: flex-end;
+    font-family: "MyFont";
+    font-weight: 500;
+    font-size: clamp(160px, 34vw, 560px);
+    line-height: 1;
+}
+
+/* the global `* { font-family }` rule would put the digits back in Switzer */
+.loader-num * {
+    font-family: inherit;
+}
+
+/* the timer: an outlined 100, with a solid copy on top clipped from the bottom up by
+   progress (Animations.js sets its clip-path) */
+.fill-num {
+    position: relative;
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.28);
+    visibility: hidden; /* shown once the font is in, so it never flashes */
+}
+
+.fill-solid {
+    position: absolute;
+    inset: 0;
+    color: #fff;
+    -webkit-text-stroke: 0;
+    clip-path: inset(100% 0 0 0);
+}
+
+.loader-dot {
+    flex: none;
+    width: 0.11em;
+    height: 0.11em;
+    margin: 0 0 0.1em 0.04em;
+    border-radius: 50%;
+    background: #ffd632;
+    box-shadow: 0 0 0.12em rgba(255, 214, 50, 0.6);
+}
+
 /* Phones and small tablets */
+.footer-phone-only {
+    display: none;
+}
+
 @media (max-width: 768px) {
     nav {
         padding: 0.75rem 1rem 0;
     }
 
     .logo img {
-        width: 36px;
+        width: 44px;
     }
 
     .menulist {
@@ -523,10 +1060,18 @@ nav {
 
     .box {
         /* hero starts below the header, so lift by its height to centre on the screen.
-           shortcut: 58px = mobile header height; update if the nav changes */
-        top: calc(50% - var(--box) / 2 - 58px);
-        /* shift left by half the dot's overhang so CREATIVE + dot sit centred together */
-        margin-left: calc(var(--box) * -0.549);
+           shortcut: 66px = mobile header height; update if the nav changes */
+        top: calc(50% - var(--box) / 2 - 66px);
+    }
+
+    /* The words stay dead centre (the eye centres on them, not the dot), so the dot is
+       smaller and tucked closer to fit beside them. top keeps its bottom on the baseline. */
+    .layer-dot {
+        width: calc(var(--box) * 0.045);
+        height: calc(var(--box) * 0.045);
+        margin-left: calc(var(--box) * 0.01);
+        margin-right: calc(var(--box) * -0.055);
+        top: calc(var(--box) * 0.121);
     }
 
     /* no room for side labels on a phone: the tower stays centred and the names
@@ -549,10 +1094,155 @@ nav {
     }
 
 
+    .loader-log {
+        left: 1rem;
+        font-size: 10px;
+    }
+
+    .loader-tag {
+        letter-spacing: 0.2em;
+    }
+
+    .site-footer {
+        padding: 5vh 1rem 3vh;
+    }
+
+    /* square band: the 40deg diagonal (AsciiFooter.js) fits both arms corner to corner */
+    .footer-art {
+        margin: 0 -1rem;
+        aspect-ratio: 1;
+    }
+
+    /* the whole composition fits inside the square, so no overflow past the band */
+    .footer-ascii {
+        top: 0;
+        height: 100%;
+    }
+
+    /* upper right of the dot: the empty side of this diagonal (the hands come from the
+       upper left and the lower right) */
+    .footer-spark-label {
+        left: 12px;
+        top: -24px;
+        transform: none;
+        font-size: 9px;
+    }
+
+    .footer-art-line {
+        margin-top: 0; /* caption: belongs to the hands */
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        padding: 0 4px;
+    }
+
+    /* rhythm: art + caption | big gap | CTA (title tight to its button) | nav | sign-off */
+    .footer-cta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-top: 4vh;
+        padding-bottom: 3vh;
+    }
+
+    .footer-title {
+        font-size: 46px;
+    }
+
+    /* compact: Navigate on one full-width line, Elsewhere + Currently side by side */
+    .footer-cols {
+        grid-template-columns: auto 1fr;
+        gap: 22px 28px;
+        padding: 2.5vh 0;
+    }
+
+    .footer-cols > :first-child {
+        grid-column: 1 / -1;
+    }
+
+    /* phones: Navigate only (GitHub moves into it); no Elsewhere, Currently or hex signature */
+    .footer-cols > :not(:first-child),
+    .footer-sig {
+        display: none;
+    }
+
+    .footer-row .footer-phone-only {
+        display: inline;
+    }
+
+    /* GitHub logo pushed to the right end of the nav row */
+    .site-footer .footer-row {
+        align-self: stretch; /* the column's align-items: flex-start shrinks the row, leaving no room to push */
+    }
+
+    .footer-row .footer-github {
+        display: flex;
+        margin-left: auto;
+    }
+
+    .footer-row {
+        gap: 6px 18px;
+    }
+
+    .site-footer .footer-col {
+        gap: 6px;
+        font-size: 14px;
+    }
+
+    .footer-label {
+        margin-bottom: 2px;
+    }
+
+    .footer-text {
+        font-size: 12px;
+        line-height: 1.45;
+    }
+
+    /* sign-off in two lines: copyright, then signature + back to top */
+    .footer-bar {
+        justify-content: space-between;
+        gap: 6px 12px;
+        padding-top: 1.8vh;
+    }
+
+    /* back to top as a yellow arrow button at the lower right; the text stays for screen readers */
+    .footer-bar > a.footer-link {
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #ffd632;
+        font-size: 0;
+    }
+
+    .footer-bar > a.footer-link::after {
+        /* SVG arrow: a glyph can't get a long stem without distorting its head */
+        content: "";
+        width: 14px;
+        height: 34px;
+        /* sit at the bottom so the stem meets the circle's lower edge */
+        align-self: end;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 34' fill='none' stroke='%23000' stroke-width='1.2' stroke-linejoin='round'%3E%3Cpath d='M7 34V1M1 7l6-6 6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+    }
+
     .letsTalk {
         border-radius: 24px 24px 0 0;
-        padding: 0 1.25rem;
-        box-sizing: border-box;
+        padding: 12vh 1rem 10vh;
+    }
+
+    .brief-line {
+        font-size: 40px;
+    }
+
+    /* phones: two lines would make the type tiny, so let it wrap */
+    .brief-row {
+        display: inline;
+        white-space: normal;
+    }
+
+    .talk-marquee span {
+        font-size: 60vw;
     }
 }
 

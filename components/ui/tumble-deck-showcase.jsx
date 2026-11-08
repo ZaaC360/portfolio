@@ -18,8 +18,9 @@ import gsap from "gsap"
  *
  * Ported to plain JS for this site (no TypeScript/Tailwind here). Two modes:
  * - default: wheel, drag, click and arrow keys flip the deck.
- * - `clickOnly`: only click/tap and arrow keys flip it. The wheel and touch-drags are
- *   left to the page, so scrolling never gets stuck on the endless deck.
+ * - `clickOnly`: only click/tap, arrow keys and `tumble:step` events (sent by the page)
+ *   flip it. The wheel and touch-drags are left to the page, so scrolling never gets
+ *   stuck on the endless deck.
  *
  * cards: [{ src, alt }]
  */
@@ -192,8 +193,14 @@ export default function TumbleDeckShowcase({
     api.current.step = (dir) => push(Math.round(target) + dir)
 
     if (clickOnly) {
+      // the page can also step it: root.dispatchEvent(new CustomEvent("tumble:step", { detail: +1 | -1 }))
+      const onStep = (e) => push(Math.round(target) + e.detail)
+      root.addEventListener("tumble:step", onStep)
       paint()
-      return () => gsap.ticker.remove(follow)
+      return () => {
+        root.removeEventListener("tumble:step", onStep)
+        gsap.ticker.remove(follow)
+      }
     }
 
     const onWheel = (e) => {
