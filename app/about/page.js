@@ -12,6 +12,7 @@ const NUMBERS = [
 ];
 
 const SERVICES = [
+  { name: "AI products", text: "LLM features, chat assistants and agents wired into your product, with RAG over your own data." },
   { name: "Web apps", text: "Full-stack MERN and Next.js apps, from database to the last pixel." },
   { name: "Mobile apps", text: "Cross-platform iOS and Android apps with React Native." },
   { name: "Landing pages", text: "Fast, animated pages that make a first impression stick." },
@@ -19,7 +20,7 @@ const SERVICES = [
 ];
 
 const TIMELINE = [
-  { year: "2025 — now", role: "Freelance developer", text: "Building web and mobile products for startups and small brands." },
+  { year: "2025 — now", role: "AI & full-stack developer", text: "Building AI-powered web and mobile products for startups and small brands: LLMs, agents and RAG in production." },
   { year: "2023 — 2025", role: "Full-stack developer", text: "Shipped MERN apps end to end: APIs, auth, dashboards and deploys." },
   { year: "2021 — 2023", role: "Frontend developer", text: "Interfaces in React, with a growing obsession for motion." },
   { year: "2021", role: "First line of code", text: "Started with HTML and CSS, never stopped." },
@@ -54,7 +55,8 @@ export default function About() {
           </h1>
           <p className="ab-bio">
             I&apos;m Zaac, a developer who designs while building. I make web and mobile apps with MERN,
-            Next.js and React Native, and I care as much about how a product moves as how it works.
+            Next.js and React Native, and I build generative AI into them: LLM features, agents and RAG
+            that ship, not demos. I care as much about how a product moves as how it works.
           </p>
         </section>
 

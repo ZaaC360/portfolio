@@ -26,6 +26,8 @@ const STACK = [
   { name: "React Native", role: "Mobile apps" },
   { name: "Next.js", role: "Framework" },
   { name: "GSAP", role: "Motion" },
+  // the top slab is the yellow one: the newest layer, crowning the stack
+  { name: "Gen AI", role: "LLMs · Agents · RAG" },
 ];
 
 export default function Home() {

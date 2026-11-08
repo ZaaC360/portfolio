@@ -40,7 +40,7 @@ export default function SiteFooter() {
         </div>
         <div className="footer-col reveal">
           <p className="footer-label">Currently</p>
-          <p className="footer-text">Building web &amp; mobile apps with MERN, Next.js and React Native.</p>
+          <p className="footer-text">Building AI-powered web &amp; mobile apps with LLMs, MERN, Next.js and React Native.</p>
         </div>
       </div>
 

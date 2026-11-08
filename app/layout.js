@@ -1,5 +1,6 @@
 import "lenis/dist/lenis.css";
 import "./globals.css";
+import CursorDot from "./CursorDot";
 
 export const metadata = { title: "Portfolio" };
 
@@ -11,7 +12,10 @@ export default function RootLayout({ children }) {
         {/* the title face is on the first screen (loader + hero): fetch it before CSS asks */}
         <link rel="preload" href="/font/NewTitle-Variable.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <CursorDot />
+      </body>
     </html>
   );
 }

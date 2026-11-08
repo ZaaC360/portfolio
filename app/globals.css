@@ -1519,8 +1519,8 @@ html {
     color: #bbb;
 }
 
-/* mouse only: a yellow dot trailing the pointer, grows over anything clickable */
-.ab-cursor {
+/* mouse only, every page (CursorDot.js): a yellow dot trailing the pointer, grows over anything clickable */
+.cursor-dot {
     position: fixed;
     left: 0;
     top: 0;
@@ -1536,11 +1536,11 @@ html {
     transition: opacity 0.3s, scale 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.ab-cursor.is-on {
+.cursor-dot.is-on {
     opacity: 1;
 }
 
-.ab-cursor.is-big {
+.cursor-dot.is-big {
     scale: 3.4;
     opacity: 0.55;
 }
