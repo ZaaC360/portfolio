@@ -90,14 +90,17 @@ export default function TumbleDeckShowcase({
   const cardRefs = React.useRef([])
   const imgRefs = React.useRef([])
   const slotK = React.useRef([])
-  const state = React.useRef({ pos: 0 })
+  const state = React.useRef({ pos: 0, low: 0 })
   const geo = React.useRef({ h: 200, gap: 44 })
   const n = cards.length
   // Two on the floor, the falling one, the front one, `depth` behind, one fading in.
   const pool = n ? depth + 5 : 0
 
   const paint = React.useCallback(() => {
-    const { pos } = state.current
+    const s = state.current
+    const { pos } = s
+    // cards behind the lowest front card ever shown never fell: keep the floor empty until they do
+    s.low = Math.min(s.low, Math.floor(pos))
     const { gap } = geo.current
     const base = Math.floor(pos) - 2
     cardRefs.current.forEach((el, j) => {
@@ -111,6 +114,7 @@ export default function TumbleDeckShowcase({
         img.alt = c.alt ?? ""
       }
       const p = cardPose(k, pos, depth)
+      if (p.flat && k < s.low) p.opacity = 0
       el.style.transform = `translate3d(0, ${-p.lift}px, ${p.z * gap}px) rotateX(${p.angle}deg)`
       el.style.opacity = String(p.opacity)
       el.style.visibility = p.opacity > 0 ? "visible" : "hidden"

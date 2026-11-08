@@ -863,8 +863,9 @@ nav {
 }
 
 /* ---------- Loader: rolling counter + build log, then the dot floods and collapses ---------- */
-html.is-loading,
-html.is-loading body {
+/* :has(.loader): the class is set in the shared layout, but only the home page has a loader to unlock it */
+html.is-loading:has(.loader),
+html.is-loading:has(.loader) body {
     overflow: hidden;
 }
 
@@ -1211,3 +1212,357 @@ html {
     }
 }
 
+
+/* ---------- About page (/about) ---------- */
+.ab {
+    padding: 14vh 8rem 0;
+    color: #000;
+}
+
+.ab-kicker,
+.ab-heading {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #777;
+}
+
+.ab-title {
+    margin-top: 2vh;
+    font-family: "MyFont";
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(56px, 9vw, 168px);
+    line-height: 0.92;
+}
+
+/* the hero's yellow dot, closing the headline */
+.ab-dot {
+    display: inline-block;
+    width: 0.14em;
+    height: 0.14em;
+    margin-left: 0.05em;
+    border-radius: 50%;
+    background: #ffd632;
+}
+
+.ab-bio {
+    max-width: 38ch;
+    margin-top: 5vh;
+    font-size: clamp(18px, 1.8vw, 26px);
+    line-height: 1.45;
+    color: #333;
+}
+
+.ab-numbers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 12vh;
+    padding: 4vh 0;
+    /* the rules: drawn in by AboutAnimations (--line 0 -> 1), top from the left, bottom from the right */
+    background:
+        linear-gradient(#000, #000) left top / calc(var(--line, 1) * 100%) 1px no-repeat,
+        linear-gradient(#000, #000) right bottom / calc(var(--line, 1) * 100%) 1px no-repeat;
+}
+
+.ab-number-value {
+    font-family: "MyFont";
+    font-weight: 500;
+    font-size: clamp(64px, 8vw, 140px);
+    line-height: 1;
+}
+
+.ab-number-label {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+.ab-block {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 2rem;
+    margin-top: 14vh;
+}
+
+.ab-services,
+.ab-timeline {
+    list-style: none;
+}
+
+.ab-services {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5vh 3rem;
+}
+
+.ab-services h3,
+.ab-timeline h3 {
+    font-family: "MyFont";
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(32px, 3.4vw, 56px);
+    line-height: 1;
+}
+
+.ab-services p,
+.ab-timeline p {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #444;
+    max-width: 42ch;
+}
+
+.ab-index {
+    display: block;
+    margin-bottom: 10px;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: #999;
+}
+
+.ab-timeline li {
+    transition: color 0.5s;
+    color: #bbb;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    padding: 3.5vh 0;
+    border-top: 1px solid #ddd;
+}
+
+.ab-timeline li:last-child {
+    border-bottom: 1px solid #ddd;
+}
+
+/* footer after a white page: no black section above to catch the arms that reach 40% of the
+   art band (1342:314) above it, so pad the footer by that much (phones have no overflow) */
+.ab {
+    margin-bottom: 16vh;
+}
+
+.ab + .site-footer {
+    padding-top: calc(3vh + 9.4vw);
+    border-radius: 40px 40px 0 0;
+}
+
+@media (max-width: 768px) {
+    .ab {
+        margin-bottom: 12vh;
+    }
+
+    .ab + .site-footer {
+        padding-top: 5vh;
+        border-radius: 24px 24px 0 0;
+    }
+}
+
+.ab-year {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 14px;
+    color: #555;
+    padding-top: 0.5em;
+}
+
+
+@media (max-width: 768px) {
+    .ab {
+        padding: 10vh 1rem 0;
+    }
+
+    .ab-numbers {
+        gap: 1rem;
+        margin-top: 8vh;
+    }
+
+    .ab-number-value {
+        font-size: 56px;
+    }
+
+    .ab-number-label {
+        font-size: 12px;
+    }
+
+    .ab-block {
+        grid-template-columns: 1fr;
+        gap: 3vh;
+        margin-top: 10vh;
+    }
+
+    .ab-services {
+        grid-template-columns: 1fr;
+        gap: 4vh;
+    }
+
+    .ab-timeline li {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+}
+
+/* ---------- About page motion (AboutAnimations.js) ---------- */
+/* SplitText wraps letters and words in divs; the global `* { font-family }` rule would
+   swap them to Switzer instead of their heading's face */
+.ab div {
+    font-family: inherit;
+}
+
+/* the headline lines drift apart on scroll: clip sideways so they never widen the page */
+.ab-intro {
+    overflow-x: clip;
+}
+
+/* yellow over the first paint, so nothing flashes before the intro; the CSS animation is a
+   fallback that clears it if the script never runs (JS sets animation: none and takes over) */
+.ab-curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: #ffd632;
+    animation: ab-curtain-off 0s 3s forwards;
+}
+
+@keyframes ab-curtain-off {
+    to { visibility: hidden; }
+}
+
+/* section labels stay in view while their list scrolls past */
+.ab-heading {
+    position: sticky;
+    top: 14vh;
+    align-self: start;
+}
+
+/* services: a yellow dot slides in and the title steps right on hover */
+.ab-services h3 {
+    position: relative;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ab-services h3::before {
+    content: "";
+    position: absolute;
+    left: -0.5em;
+    top: 50%;
+    width: 0.28em;
+    height: 0.28em;
+    border-radius: 50%;
+    background: #ffd632;
+    transform: translateY(-50%) scale(0);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ab-services li:hover h3 {
+    transform: translateX(0.5em);
+}
+
+.ab-services li:hover h3::before {
+    transform: translateY(-50%) scale(1);
+}
+
+/* timeline: grey rail, yellow line drawn by the scroll, a dot riding its tip */
+.ab-track {
+    position: relative;
+    padding-left: 2.5rem;
+}
+
+.ab-track::before,
+.ab-progress {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e5e5e5;
+}
+
+.ab-progress {
+    bottom: auto;
+    height: var(--fill, 100%); /* AboutAnimations grows it with the scroll */
+    background: #ffd632;
+}
+
+.ab-progress::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ffd632;
+    box-shadow: 0 0 0 6px rgba(255, 214, 50, 0.25);
+    transform: translate(-50%, 50%);
+}
+
+/* the role the line has reached turns from grey to ink */
+.ab-timeline li.is-on {
+    color: #000;
+}
+
+.ab-timeline li.is-on p {
+    color: #444;
+}
+
+.ab-timeline li p,
+.ab-timeline li .ab-year {
+    transition: color 0.5s;
+}
+
+.ab-timeline li:not(.is-on) p,
+.ab-timeline li:not(.is-on) .ab-year {
+    color: #bbb;
+}
+
+/* mouse only: a yellow dot trailing the pointer, grows over anything clickable */
+.ab-cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    width: 14px;
+    height: 14px;
+    margin: -7px 0 0 -7px;
+    border-radius: 50%;
+    background: #ffd632;
+    pointer-events: none;
+    opacity: 0;
+    scale: 1;
+    transition: opacity 0.3s, scale 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ab-cursor.is-on {
+    opacity: 1;
+}
+
+.ab-cursor.is-big {
+    scale: 3.4;
+    opacity: 0.55;
+}
+
+@media (max-width: 768px) {
+    .ab-heading {
+        position: static;
+    }
+
+    .ab-track {
+        padding-left: 1.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ab-curtain {
+        display: none;
+    }
+
+    .ab-timeline li,
+    .ab-timeline li:not(.is-on) p,
+    .ab-timeline li:not(.is-on) .ab-year {
+        color: inherit;
+    }
+}
