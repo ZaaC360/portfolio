@@ -118,18 +118,33 @@ export default function Animations() {
       } catch {}
       if (!loader) reveal();
       else if (seen) {
-        document.fonts.ready.then(() => {
+        // the intro already played in this tab: a plain yellow curtain (layout.js + CSS) that
+        // collapses onto the hero's dot, like /about opens. Arriving via a link like /#artworks,
+        // jump there under the curtain and collapse to the screen centre instead.
+        const go = () => {
           if (!alive) return;
-          reveal();
-        });
-        // arrived via a link like /#artworks: go there once images are in and the pins re-measured
-        if (location.hash)
-          pageLoaded.then(() => {
-            if (!alive) return;
+          const far = Math.hypot(innerWidth, innerHeight);
+          let cx = innerWidth / 2;
+          let cy = innerHeight / 2;
+          let end = 0;
+          if (location.hash) {
             ScrollTrigger.refresh();
             lenis.resize(); // its max scroll may predate the pin spacers and would clamp the jump short
-            lenis.scrollTo(location.hash, { immediate: true, force: true }); // force: may still be stopped
-          });
+            lenis.scrollTo(location.hash, { immediate: true, force: true }); // force: still stopped
+          } else {
+            const r = document.querySelector(".layer-dot").getBoundingClientRect();
+            cx = r.left + r.width / 2;
+            cy = r.top + r.height / 2;
+            end = r.width / 2;
+          }
+          gsap.fromTo(
+            loader,
+            { clipPath: `circle(${far}px at ${cx}px ${cy}px)` },
+            { clipPath: `circle(${end}px at ${cx}px ${cy}px)`, duration: 1.1, delay: 0.15, ease: "expo.inOut", onComplete: reveal }
+          );
+        };
+        // a hash target needs images in and pins measured; the dot only needs the font
+        (location.hash ? Promise.all([document.fonts.ready, pageLoaded]) : document.fonts.ready).then(go);
       } else {
         const num = loader.querySelector(".fill-num");
         const solid = loader.querySelector(".fill-solid");

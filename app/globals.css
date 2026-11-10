@@ -875,8 +875,13 @@ html {
     scrollbar-gutter: stable;
 }
 
-/* intro already played in this tab (layout.js): no loader */
+/* intro already played in this tab (layout.js): the loader is just a yellow curtain that
+   Animations.js collapses onto the hero dot */
 html.intro-seen .loader {
+    background: #ffd632;
+}
+
+html.intro-seen .loader > * {
     display: none;
 }
 
