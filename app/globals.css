@@ -875,6 +875,11 @@ html {
     scrollbar-gutter: stable;
 }
 
+/* intro already played in this tab (layout.js): no loader */
+html.intro-seen .loader {
+    display: none;
+}
+
 .loader {
     position: fixed;
     inset: 0;

@@ -105,9 +105,32 @@ export default function Animations() {
         lenis.start();
         ScrollTrigger.refresh();
         navIntro.forEach((t) => t.play());
+        // set once the intro has played (not when it starts: dev runs this effect twice)
+        try {
+          sessionStorage.setItem("intro-seen", "1");
+        } catch {}
       };
+      // the intro plays once per tab: coming back from another page goes straight to the site
+      // (layout.js hides the loader before first paint when this flag is set)
+      let seen = false;
+      try {
+        seen = sessionStorage.getItem("intro-seen") === "1";
+      } catch {}
       if (!loader) reveal();
-      else {
+      else if (seen) {
+        document.fonts.ready.then(() => {
+          if (!alive) return;
+          reveal();
+        });
+        // arrived via a link like /#artworks: go there once images are in and the pins re-measured
+        if (location.hash)
+          pageLoaded.then(() => {
+            if (!alive) return;
+            ScrollTrigger.refresh();
+            lenis.resize(); // its max scroll may predate the pin spacers and would clamp the jump short
+            lenis.scrollTo(location.hash, { immediate: true, force: true }); // force: may still be stopped
+          });
+      } else {
         const num = loader.querySelector(".fill-num");
         const solid = loader.querySelector(".fill-solid");
         const pct = loader.querySelector(".loader-pct");
