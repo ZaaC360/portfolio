@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Drawing Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1440px; height: 900px; overflow: hidden; background: #fff; color: #000; font-family: system-ui, sans-serif; position: relative; }
+.mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #777; }
+nav { position: absolute; left: 128px; right: 128px; top: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; }
+.logo { width: 56px; height: 56px; border-radius: 50%; border: 1.5px solid #000; }
+nav ul { display: flex; gap: 32px; list-style: none; align-items: center; }
+.talk { background: #000; color: #fff; border-radius: 12px; padding: 12px 18px; }
+/* the sheet: hairline frame with drafting ticks */
+.sheet { position: absolute; left: 48px; right: 48px; top: 96px; bottom: 32px; border: 1.5px solid #000; }
+.sheet::before { content: ""; position: absolute; inset: 8px; border: 1px solid #ccc; }
+.kicker { position: absolute; left: 80px; top: 56px; }
+h1 { position: absolute; left: 76px; top: 76px; font-family: Antonio, sans-serif; font-weight: 500; font-size: 300px; line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em; }
+h1 i { display: inline-block; width: 42px; height: 42px; border-radius: 50%; background: #ffd632; margin-left: 12px; }
+.lede { position: absolute; left: 80px; top: 388px; width: 300px; font-size: 20px; line-height: 1.45; color: #333; }
+/* exploded tower */
+.stage { position: absolute; left: 560px; top: 520px; perspective: 4000px; }
+.tower { width: 230px; height: 230px; transform-style: preserve-3d; transform: rotateX(58deg) rotateZ(-32deg); position: relative; }
+.slab { position: absolute; inset: 0; background: #fff; outline: 1.5px solid #000; transform: translateZ(calc(var(--i) * 46px)); }
+.slab:last-child { background: #ffd632; }
+.axis { position: absolute; left: 675px; top: 150px; width: 1px; height: 560px; background: repeating-linear-gradient(#000 0 8px, transparent 8px 14px); }
+/* parts list: one row per slab, leader line back to the tower */
+.parts { position: absolute; right: 80px; top: 196px; width: 420px; list-style: none; }
+.parts li { height: 39px; display: grid; grid-template-columns: 44px 1fr auto; align-items: center; border-top: 1px solid #000; position: relative; }
+.parts li::before { content: ""; position: absolute; right: 100%; top: 50%; width: 150px; height: 1px; background: #000; }
+.parts li::after { content: ""; position: absolute; right: calc(100% + 150px); top: calc(50% - 4px); width: 8px; height: 8px; border-radius: 50%; background: #ffd632; outline: 1px solid #000; }
+.parts b { font-family: Antonio, sans-serif; font-weight: 500; font-size: 26px; text-transform: uppercase; }
+.parts li:first-child b { background: #ffd632; padding: 0 8px; justify-self: start; }
+.parts span { font-size: 12px; }
+/* title block */
+.block { position: absolute; right: 56px; bottom: 40px; width: 444px; display: grid; grid-template-columns: 2fr 1fr 1fr; border: 1.5px solid #000; }
+.block div { padding: 10px 12px; border-right: 1px solid #000; border-top: 1px solid #000; }
+.block .wide { grid-column: 1 / -1; border-top: 0; font-family: Antonio, sans-serif; font-size: 34px; text-transform: uppercase; }
+.block p { font-size: 16px; margin-top: 4px; }
+.note { position: absolute; left: 80px; bottom: 64px; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo"></div>
+  <ul><li>About</li><li>Artworks</li><li>Stack</li><li class="talk">Let's Talk</li></ul>
+</nav>
+<div class="sheet">
+  <p class="mono kicker">The Stack · Assembly drawing</p>
+  <h1>Stack<i></i></h1>
+  <p class="lede">Ten layers, drawn apart so you can see how each one carries the next.</p>
+  <p class="mono note">Scroll to assemble ↓</p>
+</div>
+<div class="axis"></div>
+<div class="stage">
+  <div class="tower">
+    <div class="slab" style="--i:0"></div><div class="slab" style="--i:1"></div><div class="slab" style="--i:2"></div>
+    <div class="slab" style="--i:3"></div><div class="slab" style="--i:4"></div><div class="slab" style="--i:5"></div>
+    <div class="slab" style="--i:6"></div><div class="slab" style="--i:7"></div><div class="slab" style="--i:8"></div>
+    <div class="slab" style="--i:9"></div>
+  </div>
+</div>
+<ol class="parts">
+  <li><span class="mono">10</span><b>Gen AI</b><span class="mono">LLMs · Agents · RAG</span></li>
+  <li><span class="mono">09</span><b>GSAP</b><span class="mono">Motion</span></li>
+  <li><span class="mono">08</span><b>Next.js</b><span class="mono">Framework</span></li>
+  <li><span class="mono">07</span><b>React Native</b><span class="mono">Mobile apps</span></li>
+  <li><span class="mono">06</span><b>React</b><span class="mono">Interface</span></li>
+  <li><span class="mono">05</span><b>TypeScript</b><span class="mono">Language</span></li>
+  <li><span class="mono">04</span><b>Express</b><span class="mono">API</span></li>
+  <li><span class="mono">03</span><b>Node.js</b><span class="mono">Runtime</span></li>
+  <li><span class="mono">02</span><b>MongoDB</b><span class="mono">NoSQL database</span></li>
+  <li><span class="mono">01</span><b>PostgreSQL</b><span class="mono">SQL database</span></li>
+</ol>
+<div class="block">
+  <div class="wide">Zaac · Full stack assembly</div>
+  <div><span class="mono">Drawn by</span><p>Zaac</p></div>
+  <div><span class="mono">Parts</span><p>10</p></div>
+  <div><span class="mono">Sheet</span><p>01 / 01</p></div>
+</div>
+</body>
+</html>

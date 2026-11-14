@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Contact Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1440px; height: 900px; overflow: hidden; background: #fff; color: #000; font-family: system-ui, sans-serif; position: relative; }
+.mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #777; }
+nav { position: absolute; left: 128px; right: 128px; top: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; }
+.logo { width: 56px; height: 56px; border-radius: 50%; border: 1.5px solid #000; }
+nav ul { display: flex; gap: 32px; list-style: none; align-items: center; }
+.talk { background: #000; color: #fff; border-radius: 12px; padding: 12px 18px; }
+h1 { position: absolute; left: 120px; top: 120px; font-family: Antonio, sans-serif; font-weight: 500; font-size: 178px; line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em; }
+h1 i { display: inline-block; width: 26px; height: 26px; border-radius: 50%; background: #ffd632; margin-left: 8px; }
+.lede { position: absolute; left: 128px; top: 300px; width: 330px; font-size: 20px; line-height: 1.45; color: #333; }
+/* the sheet: three black strips of two... drawn as one black sheet with frames */
+.sheet { position: absolute; left: 560px; top: 110px; width: 760px; background: #000; padding: 26px 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 14px; transform: rotate(-1.2deg); }
+.frame { position: relative; aspect-ratio: 2.06; background: #ececec; }
+.frame::before { content: attr(data-no); position: absolute; left: 0; top: -20px; font: 11px ui-monospace, Menlo, monospace; letter-spacing: 0.15em; color: #fff; }
+.frame::after { content: "ZAAC 400"; position: absolute; right: 0; top: -20px; font: 11px ui-monospace, Menlo, monospace; letter-spacing: 0.15em; color: #777; }
+.frame b { position: absolute; left: 10%; top: 18%; width: 46%; height: 10%; background: #000; }
+.frame u { position: absolute; left: 10%; top: 38%; width: 30%; height: 6%; background: #bbb; }
+.frame s { position: absolute; right: 8%; bottom: 12%; width: 34%; height: 56%; background: #d4d4d4; }
+/* the pick: a yellow grease-pencil ring */
+.ring { position: absolute; left: 546px; top: 112px; width: 290px; height: 190px; border: 5px solid #ffd632; border-radius: 48% 52% 50% 50% / 55% 45% 55% 45%; transform: rotate(-5deg); }
+/* the picked frame's plate under the sheet */
+.plate { position: absolute; left: 560px; right: 120px; top: 556px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: end; }
+.plate h2 { font-family: Antonio, sans-serif; font-weight: 500; font-size: 150px; line-height: 0.88; text-transform: uppercase; letter-spacing: -0.02em; }
+.plate p { font-size: 18px; line-height: 1.45; color: #333; margin-top: 14px; }
+.facts { list-style: none; border-top: 1px solid #000; }
+.facts li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #ddd; font-size: 15px; }
+.note { position: absolute; left: 128px; bottom: 56px; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo"></div>
+  <ul><li>About</li><li>Artworks</li><li>Stack</li><li class="talk">Let's Talk</li></ul>
+</nav>
+<h1>Artworks<i></i></h1>
+<p class="lede">Six things I designed and built. Pick a frame.</p>
+<p class="mono note">Frame 01 of 06 · click any frame</p>
+<div class="sheet">
+  <div class="frame" data-no="01"><b></b><u></u><s></s></div>
+  <div class="frame" data-no="02"><b></b><u></u><s></s></div>
+  <div class="frame" data-no="03"><b></b><u></u><s></s></div>
+  <div class="frame" data-no="04"><b></b><u></u><s></s></div>
+  <div class="frame" data-no="05"><b></b><u></u><s></s></div>
+  <div class="frame" data-no="06"><b></b><u></u><s></s></div>
+</div>
+<div class="ring"></div>
+<div class="plate">
+  <div>
+    <span class="mono">01 · AI product · Sample</span>
+    <h2>Paperhand</h2>
+  </div>
+  <div>
+    <ul class="facts">
+      <li><span class="mono">Year</span>2026</li>
+      <li><span class="mono">Role</span>Design + build</li>
+      <li><span class="mono">Stack</span>Next.js · RAG · PostgreSQL</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

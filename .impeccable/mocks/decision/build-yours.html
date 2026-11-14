@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>What Are You Building?</title>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1440px; height: 900px; overflow: hidden; background: #fff; color: #000; font-family: system-ui, sans-serif; position: relative; }
+.mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #6b6b6b; }
+nav { position: absolute; left: 128px; right: 128px; top: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; }
+.logo { width: 56px; height: 56px; border-radius: 50%; border: 1.5px solid #000; }
+nav ul { display: flex; gap: 32px; list-style: none; align-items: center; }
+.talk { background: #000; color: #fff; border-radius: 12px; padding: 12px 18px; }
+.kicker { position: absolute; left: 128px; top: 136px; }
+/* the sentence: the blank is the visitor's choice, in yellow */
+h1 { position: absolute; left: 124px; top: 164px; font-family: Antonio, sans-serif; font-weight: 500; font-size: 176px; line-height: 0.95; text-transform: uppercase; letter-spacing: -0.02em; }
+h1 mark { background: #ffd632; padding: 0 16px; margin-left: -16px; }
+h1 i { display: inline-block; width: 26px; height: 26px; border-radius: 50%; background: #ffd632; margin-left: 10px; }
+.choices { position: absolute; left: 128px; top: 560px; width: 620px; list-style: none; }
+.choices li { display: flex; justify-content: space-between; align-items: baseline; padding: 11px 0; border-top: 1px solid #ddd; font-family: Antonio, sans-serif; font-size: 30px; text-transform: uppercase; color: #767676; }
+.choices li.on { color: #000; border-top-color: #000; }
+.choices li.on::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: #ffd632; outline: 1px solid #000; margin-right: 14px; align-self: center; }
+.choices li.on b { flex: 1; font-weight: 500; }
+.choices b { font-weight: 500; }
+/* the tower: used layers solid, the rest ghosted */
+.bg { position: absolute; right: -40px; top: 120px; font-family: Antonio, sans-serif; font-size: 620px; line-height: 1; color: #f2f2f2; }
+.stage { position: absolute; left: 960px; top: 560px; perspective: 4000px; }
+.tower { width: 250px; height: 250px; transform-style: preserve-3d; transform: rotateX(58deg) rotateZ(-28deg); position: relative; }
+.slab { position: absolute; inset: 0; background: #fff; outline: 1.5px solid #000; transform: translateZ(calc(var(--i) * 44px)); }
+.slab.off { background: transparent; outline: 1px dashed #c4c4c4; }
+.slab.top { background: #ffd632; }
+.labels { position: absolute; left: 1218px; top: 212px; list-style: none; }
+.labels li { height: 37.3px; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; white-space: nowrap; }
+.labels li::before { content: ""; width: 60px; height: 1px; background: #000; }
+.labels li.off { color: #767676; font-weight: 400; }
+.labels li.off::before { background: #ddd; }
+.count { position: absolute; left: 128px; bottom: 40px; }
+.count b { color: #000; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo"></div>
+  <ul><li>About</li><li>Artworks</li><li>Stack</li><li class="talk">Let's Talk</li></ul>
+</nav>
+<p class="mono kicker">The Stack · Pick a project, watch it assemble</p>
+<h1>I'm building<br>a <mark>mobile app</mark><i></i></h1>
+<ol class="choices">
+  <li><b>AI product</b><span class="mono">7 layers</span></li>
+  <li><b>Web app</b><span class="mono">7 layers</span></li>
+  <li class="on"><b>Mobile app</b><span class="mono">5 layers</span></li>
+  <li><b>Landing page</b><span class="mono">4 layers</span></li>
+  <li><b>Online store</b><span class="mono">7 layers</span></li>
+</ol>
+<div class="bg">5</div>
+<div class="stage">
+  <div class="tower">
+    <div class="slab off" style="--i:0"></div><div class="slab" style="--i:1"></div><div class="slab" style="--i:2"></div>
+    <div class="slab" style="--i:3"></div><div class="slab" style="--i:4"></div><div class="slab off" style="--i:5"></div>
+    <div class="slab top" style="--i:6"></div><div class="slab off" style="--i:7"></div><div class="slab off" style="--i:8"></div>
+    <div class="slab off" style="--i:9"></div>
+  </div>
+</div>
+<ol class="labels">
+  <li class="off">10 Gen AI</li>
+  <li class="off">09 GSAP</li>
+  <li class="off">08 Next.js</li>
+  <li>07 React Native</li>
+  <li class="off">06 React</li>
+  <li>05 TypeScript</li>
+  <li>04 Express</li>
+  <li>03 Node.js</li>
+  <li>02 MongoDB</li>
+  <li class="off">01 PostgreSQL</li>
+</ol>
+<p class="mono count"><b>5 of 10 layers</b> · scroll for what each one does ↓</p>
+</body>
+</html>

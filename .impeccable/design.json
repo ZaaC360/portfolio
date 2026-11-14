@@ -1,0 +1,530 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-14T15:02:29.651Z",
+  "title": "Design System: Zaac",
+  "extensions": {
+    "colorMeta": {
+      "yellow": {
+        "role": "primary",
+        "displayName": "Signal Yellow",
+        "canonical": "#ffd632",
+        "tonalRamp": [
+          "oklch(15% 0.03 95)",
+          "oklch(28% 0.06 95)",
+          "oklch(42% 0.09 95)",
+          "oklch(56% 0.12 95)",
+          "oklch(70% 0.15 95)",
+          "oklch(82% 0.17 95)",
+          "oklch(90% 0.13 95)",
+          "oklch(96% 0.05 95)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#000",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#fff",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "text-body": {
+        "role": "neutral",
+        "displayName": "Body Grey",
+        "canonical": "#333",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "Secondary Grey",
+        "canonical": "#444",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "text-caption": {
+        "role": "neutral",
+        "displayName": "Caption Grey",
+        "canonical": "#555",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "label": {
+        "role": "neutral",
+        "displayName": "Label Grey",
+        "canonical": "#666",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "inactive": {
+        "role": "neutral",
+        "displayName": "Inactive Grey",
+        "canonical": "#bbb",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#ddd",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "card-ground": {
+        "role": "neutral",
+        "displayName": "Card Ground",
+        "canonical": "#ececec",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "on-ink": {
+        "role": "neutral",
+        "displayName": "On-Ink Text",
+        "canonical": "#e6e6e6",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "on-ink-soft": {
+        "role": "neutral",
+        "displayName": "On-Ink Soft",
+        "canonical": "#cfcfcf",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "on-ink-muted": {
+        "role": "neutral",
+        "displayName": "On-Ink Muted",
+        "canonical": "#bdbdbd",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "label-on-ink": {
+        "role": "neutral",
+        "displayName": "On-Ink Label",
+        "canonical": "#8a8a8a",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "outline-on-ink": {
+        "role": "neutral",
+        "displayName": "On-Ink Outline",
+        "canonical": "#3a3a3a",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "hairline-on-ink": {
+        "role": "neutral",
+        "displayName": "On-Ink Hairline",
+        "canonical": "#222",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(86% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "invalid": {
+        "role": "tertiary",
+        "displayName": "Invalid Coral",
+        "canonical": "#ff6b4a",
+        "tonalRamp": [
+          "oklch(15% 0.04 33)",
+          "oklch(28% 0.08 33)",
+          "oklch(42% 0.13 33)",
+          "oklch(56% 0.18 33)",
+          "oklch(70% 0.19 33)",
+          "oklch(80% 0.12 33)",
+          "oklch(89% 0.07 33)",
+          "oklch(96% 0.03 33)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page titles in uppercase NewTitle; poster variants scale with vw and vh."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Footer call to action and other second-level display lines."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Names of list items: services, roles, parts."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "The one paragraph beside or under a title, capped at 24 to 38ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Supporting paragraphs and fact values, capped at 42ch."
+      },
+      "nav": {
+        "displayName": "Nav",
+        "purpose": "Header links and the Let's Talk button; 14px on phones."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Mono uppercase spec lines, hints, counters, captions and fact labels."
+      },
+      "label-sm": {
+        "displayName": "Label Small",
+        "purpose": "Mono uppercase part numbers, roles and title-block field names."
+      }
+    },
+    "shadows": [
+      {
+        "name": "spark-glow",
+        "value": "0 0 18px 4px rgba(255, 214, 50, 0.55)",
+        "purpose": "The yellow spark between the hands on black; pulses to 0 0 28px 8px rgba(255, 214, 50, 0.7)."
+      },
+      {
+        "name": "pulse-ring",
+        "value": "0 0 0 10px rgba(255, 214, 50, 0)",
+        "purpose": "End state of the breathing live dot, animated from 0 0 0 0 rgba(255, 214, 50, 0.6)."
+      },
+      {
+        "name": "tip-halo",
+        "value": "0 0 0 6px rgba(255, 214, 50, 0.25)",
+        "purpose": "The dot riding the timeline's progress line."
+      },
+      {
+        "name": "card-edge",
+        "value": "0 0 0 1px rgba(0, 0, 0, 0.24)",
+        "purpose": "Hairline edge so light screenshots stay visible on white. Not a drop shadow."
+      },
+      {
+        "name": "ascii-bloom",
+        "value": "drop-shadow(0 0 4px rgba(255, 255, 255, 0.25))",
+        "purpose": "CSS filter on the dithered ASCII hands canvas."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-snap",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Every CSS transform and scale transition; registered in GSAP as the custom ease ab-snap for rising characters."
+      },
+      {
+        "name": "ease-flood",
+        "value": "cubic-bezier(0.7, 0, 0.2, 1)",
+        "purpose": "The sent-flood circle wipe on Let's Talk, 1.1s."
+      },
+      {
+        "name": "gsap-curtain",
+        "value": "expo.inOut",
+        "purpose": "Yellow curtain collapsing into the title dot (1.1 to 1.15s) and frame rules drawing in."
+      },
+      {
+        "name": "gsap-settle",
+        "value": "elastic.out(1, 0.35)",
+        "purpose": "The dot settling to size after the curtain; elastic.out(1, 0.4) for the magnetic send button."
+      },
+      {
+        "name": "gsap-unblur",
+        "value": "power2.out",
+        "purpose": "Paragraph words unblurring from 10 to 12px with a small upward drift, 0.8s, staggered."
+      },
+      {
+        "name": "duration-hover",
+        "value": "0.5s",
+        "purpose": "Hover moves: the dot sliding in, the name stepping right."
+      },
+      {
+        "name": "duration-object",
+        "value": "0.7s to 0.9s",
+        "purpose": "Objects moving in 3D: cards lifting, slabs sliding, the tower exploding."
+      },
+      {
+        "name": "duration-state",
+        "value": "0.2s to 0.3s",
+        "purpose": "Colour, border and opacity changes on controls."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "768px"
+      },
+      {
+        "name": "talk-form-stack",
+        "value": "1024px"
+      },
+      {
+        "name": "stack-sheet-tight",
+        "value": "1100px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Send Button",
+      "kind": "button",
+      "refersTo": "button-send",
+      "description": "Primary action on black: sends the brief. Turns white on hover.",
+      "html": "<div class=\"ds-ink\"><button class=\"ds-btn-send\">Send it</button></div>",
+      "css": ".ds-ink { background: #000; padding: 32px; } .ds-btn-send { font-family: \"MyFont\"; font-weight: 500; text-transform: uppercase; font-size: clamp(28px, 2.6vw, 44px); line-height: 1; padding: 0.55em 1.1em; border: none; border-radius: 999px; background: #ffd632; color: #000; cursor: pointer; transition: background 0.2s, color 0.2s; } .ds-btn-send:hover { background: #fff; } .ds-btn-send:focus-visible { outline: 2px solid #ffd632; outline-offset: 3px; } .ds-btn-send:disabled { opacity: 0.5; cursor: progress; }"
+    },
+    {
+      "name": "Footer Button",
+      "kind": "button",
+      "refersTo": "button-footer",
+      "description": "White pill with a yellow dot, on the black footer. Turns yellow on hover and focus.",
+      "html": "<div class=\"ds-ink\"><a href=\"#\" class=\"ds-btn-footer\">Start a project</a></div>",
+      "css": ".ds-ink { background: #000; padding: 32px; } .ds-btn-footer { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; background: #fff; color: #000; font-family: \"switzer\"; font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; } .ds-btn-footer::before { content: \"\"; width: 8px; height: 8px; border-radius: 50%; background: #ffd632; } .ds-btn-footer:hover, .ds-btn-footer:focus-visible { background: #ffd632; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-cta",
+      "description": "Three plain links and the Let's Talk button, no bar or border.",
+      "html": "<ul class=\"ds-nav\"><li><a href=\"#\">About</a></li><li><a href=\"#\">Artworks</a></li><li><a href=\"#\">Stack</a></li><li><a href=\"#\" class=\"ds-nav-talk\">Let's Talk</a></li></ul>",
+      "css": ".ds-nav { display: flex; gap: 2rem; align-items: center; list-style: none; margin: 0; padding: 0; font-family: \"switzer\"; font-size: 18px; font-weight: 400; } .ds-nav a { color: inherit; text-decoration: none; } .ds-nav .ds-nav-talk { color: #fff; background: #000; border-radius: 12px; padding: 12px 18px; line-height: 1; }"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Answer choice on the Let's Talk form. Selected turns yellow.",
+      "html": "<div class=\"ds-ink ds-chips\"><button class=\"ds-chip\" aria-pressed=\"true\">Web app</button><button class=\"ds-chip\" aria-pressed=\"false\">Mobile app</button><button class=\"ds-chip\" aria-pressed=\"false\">Landing page</button></div>",
+      "css": ".ds-ink { background: #000; padding: 32px; } .ds-chips { display: flex; flex-wrap: wrap; gap: 10px; } .ds-chip { font-family: \"switzer\"; font-size: 15px; padding: 9px 18px; border-radius: 999px; border: 1px solid #3a3a3a; background: transparent; color: #e6e6e6; cursor: pointer; transition: background 0.25s, color 0.25s, border-color 0.25s; } .ds-chip:hover { border-color: #fff; } .ds-chip[aria-pressed=\"true\"] { background: #ffd632; border-color: #ffd632; color: #000; } .ds-chip:focus-visible { outline: 2px solid #ffd632; outline-offset: 3px; }"
+    },
+    {
+      "name": "Blank Input",
+      "kind": "input",
+      "refersTo": "input-blank",
+      "description": "An underlined blank in display type. Typed text is yellow; the rule turns yellow on focus and coral when invalid.",
+      "html": "<div class=\"ds-ink\"><input class=\"ds-input-blank\" type=\"email\" placeholder=\"you@company.com\" aria-label=\"Email\"></div>",
+      "css": ".ds-ink { background: #000; padding: 32px; } .ds-input-blank { display: block; width: 100%; box-sizing: border-box; padding: 0.15em 0 0.2em; font-family: \"MyFont\"; font-weight: 500; text-transform: uppercase; font-size: clamp(28px, 2.6vw, 46px); color: #ffd632; caret-color: #ffd632; background: transparent; border: none; border-bottom: 2px solid #333; border-radius: 0; outline: none; transition: border-color 0.25s; } .ds-input-blank::placeholder { color: #6b6b6b; } .ds-input-blank:focus { border-bottom-color: #ffd632; } .ds-input-blank:not(:placeholder-shown):not(:focus):invalid { border-bottom-color: #ff6b4a; }"
+    },
+    {
+      "name": "Display Word and Dot",
+      "kind": "custom",
+      "refersTo": "display",
+      "description": "The page title: one uppercase NewTitle word closed by the yellow dot, with a mono label line.",
+      "html": "<div class=\"ds-title-wrap\"><h1 class=\"ds-title\">Artworks<span class=\"ds-dot\" aria-hidden=\"true\"></span></h1><p class=\"ds-label\">01 / 06</p></div>",
+      "css": ".ds-title-wrap { background: #fff; color: #000; padding: 24px; } .ds-title { margin: 0; font-family: \"MyFont\"; font-weight: 500; text-transform: uppercase; white-space: nowrap; font-size: clamp(56px, 9vw, 168px); line-height: 0.9; } .ds-dot { display: inline-block; width: 0.14em; height: 0.14em; margin-left: 0.05em; border-radius: 50%; background: #ffd632; } .ds-label { margin: 14px 0 0; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #666; }"
+    },
+    {
+      "name": "List Row",
+      "kind": "custom",
+      "refersTo": "title",
+      "description": "Hairline-divided row; on hover, focus or current a yellow dot slides in and the name steps right.",
+      "html": "<ul class=\"ds-rows\"><li><a href=\"#\" aria-current=\"true\"><span class=\"ds-row-no\">01</span><b>Next.js</b><span class=\"ds-row-role\">Framework</span></a></li><li><a href=\"#\"><span class=\"ds-row-no\">02</span><b>React Native</b><span class=\"ds-row-role\">Mobile</span></a></li></ul>",
+      "css": ".ds-rows { list-style: none; margin: 0; padding: 16px 24px; background: #fff; color: #000; } .ds-rows a { display: grid; grid-template-columns: 2.4em 1fr auto; align-items: baseline; gap: 0.5rem; padding: 8px 0; border-top: 1px solid #ddd; color: inherit; text-decoration: none; transition: border-color 0.3s; } .ds-rows li:last-child a { border-bottom: 1px solid #ddd; } .ds-rows a:focus-visible { outline: 2px solid #000; outline-offset: 2px; } .ds-row-no, .ds-row-role { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #666; } .ds-row-no { justify-self: start; margin-left: -5px; padding: 2px 5px; transition: background 0.3s, color 0.3s; } .ds-rows b { position: relative; justify-self: start; font-family: \"MyFont\"; font-weight: 500; text-transform: uppercase; font-size: clamp(20px, 3.2vh, 34px); line-height: 1.05; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); } .ds-rows b::before { content: \"\"; position: absolute; left: -0.55em; top: 50%; width: 0.3em; height: 0.3em; border-radius: 50%; background: #ffd632; transform: translateY(-50%) scale(0); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); } .ds-rows a:is(:hover, :focus-visible, [aria-current]) b { transform: translateX(0.55em); } .ds-rows a:is(:hover, :focus-visible, [aria-current]) b::before { transform: translateY(-50%) scale(1); } .ds-rows a[aria-current] { border-top-color: #000; } .ds-rows a[aria-current] .ds-row-no { background: #ffd632; color: #000; }"
+    },
+    {
+      "name": "Screenshot Card and Phantom Slot",
+      "kind": "card",
+      "refersTo": "screenshot-card",
+      "description": "The 2.06:1 project card with its hairline edge, beside the dashed slot that holds an empty place and fills yellow on hover.",
+      "html": "<div class=\"ds-floor\"><div class=\"ds-card\"></div><a href=\"#\" class=\"ds-slot\">Put yours here</a></div>",
+      "css": ".ds-floor { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 24px; background: #fff; border-bottom: 1px solid #000; } .ds-card { aspect-ratio: 2.06; border-radius: 3px 3px 0 0; background: #ececec; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.24); } .ds-slot { display: grid; place-items: center; aspect-ratio: 2.06; outline: 1.5px dashed #000; outline-offset: -1.5px; font-family: \"switzer\"; font-size: clamp(16px, 1.4vw, 20px); font-weight: 500; color: #000; text-decoration: none; transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1); } .ds-slot:is(:hover, :focus-visible) { background-color: #ffd632; outline-style: solid; }"
+    },
+    {
+      "name": "Guide Pill",
+      "kind": "custom",
+      "refersTo": "guide-pill",
+      "description": "Small black pill with a yellow bullet that follows the cursor over the home deck.",
+      "html": "<span class=\"ds-guide\">Click to drop</span>",
+      "css": ".ds-guide { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #000; color: #fff; font-family: \"switzer\"; font-size: 13px; font-weight: 500; white-space: nowrap; } .ds-guide::before { content: \"\"; width: 7px; height: 7px; border-radius: 50%; background: #ffd632; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Poster and the Dot",
+    "overview": "The site is a printed poster that moves. Huge condensed uppercase words in black on white, a self-portrait cut into the type, and one yellow dot that closes the headline like a full stop. Every surface after the home hero repeats that sentence structure: a giant word, a yellow dot after it, a short plain-spoken line beside it, and small monospaced spec text underneath. The mood is confident, graphic and a little playful, never ornamental.\n\nDepth is physical, not painted. Things are objects in one CSS perspective: the hero splits into lifted layers, the stack is a tower of slabs with real thickness, project screenshots are cards that fall and stand back up on a floor line. Where an object was or will be, a dashed phantom outline marks its place. The drafting vocabulary (hairline rules, numbered parts, leader lines, title blocks) carries the detail.\n\nTwo grounds exist and they alternate by purpose. White is where the work is shown. Black is where contact happens: the footer and the Let's Talk page, with dithered ASCII hands reaching toward a yellow spark. Motion is part of the identity on every surface, and every surface also ships a still, complete poster for reduced motion and for no JavaScript.",
+    "keyCharacteristics": [
+      "One accent only: yellow on a strict black and white ground, no second hue.",
+      "Condensed uppercase display type at poster scale, set tight (line-height 0.84 to 1).",
+      "The yellow dot as punctuation, cursor, spark, progress tip and selection marker.",
+      "Flat surfaces, hairline rules and dashed phantom outlines instead of shadows.",
+      "Objects in CSS 3D perspective, moved by scroll and hover.",
+      "Monospace uppercase labels for specs, counters and status lines."
+    ],
+    "rules": [
+      {
+        "name": "The One Dot Rule",
+        "body": "Yellow is the only colour. It marks one thing at a time: the end of the headline, the thing in hand, the thing selected, the action that sends. If two unrelated things on a screen are yellow, one of them is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The Fill-Not-Text Rule",
+        "body": "On white, yellow is a shape with black on it. Yellow text appears only on black.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Grounds Rule",
+        "body": "White shows work, black makes contact. A black section meets a white page with rounded top corners (`rounded.section`, `rounded.frame` on phones).",
+        "section": "colors"
+      },
+      {
+        "name": "The Shout and the Whisper Rule",
+        "body": "Display type is always uppercase NewTitle at weight 500 with line-height at or below 1.1. Nothing in between: the next size down is reading text, not a medium heading in Switzer.",
+        "section": "typography"
+      },
+      {
+        "name": "The Inherit Rule",
+        "body": "Because `*` forces Switzer, any wrapper inside a NewTitle or mono block (including the divs SplitText injects) must set `font-family: inherit`. Every surface carries this rule; a new one needs it too.",
+        "section": "typography"
+      },
+      {
+        "name": "The Whole Word Rule",
+        "body": "A display word stays on one line (`white-space: nowrap`) and is sized to fit the viewport in both directions (`vw` and `vh` in one `min()`/`clamp()`), rather than wrapping.",
+        "section": "typography"
+      },
+      {
+        "name": "The Only Light Is Yellow Rule",
+        "body": "Surfaces are flat at rest and in every state. A glow belongs to the yellow dot on black, nowhere else.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Phantom Rule",
+        "body": "When an object leaves its place (a slab pulled from the tower, a plate card still lying on its floor line, an empty slot waiting), a 1.5px dashed black outline holds the place.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do end a page's display word with the yellow dot, sized in ems of that word.",
+      "Do keep the palette to black, white, the listed greys and `yellow`. Use `label` for mono labels on white and `label-on-ink` on black.",
+      "Do set display text in uppercase NewTitle at weight 500 on one line, sized with `vw` and `vh` together so it fits.",
+      "Do add `font-family: inherit` to wrappers inside display and mono blocks, since the global rule forces Switzer.",
+      "Do use `spacing.gutter` side margins (`spacing.gutter-phone` at 768px and below) and viewport-height vertical spacing.",
+      "Do show depth with CSS perspective, hinges and dashed 1.5px phantom outlines.",
+      "Do use `cubic-bezier(0.16, 1, 0.3, 1)` for transforms and ship a complete static state for reduced motion and no JavaScript.",
+      "Do give focusable controls a 2px outline offset 2 to 3px: black on white or yellow, yellow on black.",
+      "Do draw icons as inline SVG, as the GitHub mark and the phone back-to-top arrow are."
+    ],
+    "donts": [
+      "Don't introduce a second accent hue. `invalid` is for an invalid field's underline only.",
+      "Don't set yellow text on white, or use yellow for two unrelated things on one screen.",
+      "Don't add drop shadows or blurred, floating panels. The only glow is the yellow dot's on black.",
+      "Don't fill a surface with a gradient. Gradients are for masks and drawn rules.",
+      "Don't round screenshot cards beyond `rounded.card` or put them in padded, shadowed tiles.",
+      "Don't box form fields. A field is an underlined blank in a line of display type.",
+      "Don't set headings in Switzer or mix-case NewTitle.",
+      "Don't hide content behind motion: nothing may depend on an animation having run."
+    ]
+  }
+}

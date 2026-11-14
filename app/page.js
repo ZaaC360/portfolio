@@ -2,33 +2,12 @@
 import Animations from "./Animations";
 import ContactForm from "./ContactForm";
 import SiteFooter from "./SiteFooter";
+import { STACK } from "./stackData"; // shared with /stack
+import { PROJECTS } from "./projectData"; // shared with /artworks
 import TumbleDeckShowcase from "../components/ui/tumble-deck-showcase";
 
-// Placeholder Unsplash shots: swap each src for a screenshot of your project
-// (e.g. "/imgs/projects/my-app.png", ~2:1, top of the page shows) and set alt to its name.
-const unsplash = (id) => `https://images.unsplash.com/photo-${id}?w=1440&h=700&fit=crop&q=70`;
-const PROJECTS = [
-  { src: unsplash("1460925895917-afdab827c52f"), alt: "Project one" },
-  { src: unsplash("1547658719-da2b51169166"), alt: "Project two" },
-  { src: unsplash("1551650975-87deedd944c3"), alt: "Project three" },
-  { src: unsplash("1498050108023-c5249f4df085"), alt: "Project four" },
-  { src: unsplash("1559028012-481c04fa702d"), alt: "Project five" },
-  { src: unsplash("1555066931-4365d14bab8c"), alt: "Project six" },
-];
-
-const STACK = [
-  { name: "PostgreSQL", role: "SQL database" },
-  { name: "MongoDB", role: "NoSQL database" },
-  { name: "Node.js", role: "Runtime" },
-  { name: "Express", role: "API" },
-  { name: "TypeScript", role: "Language" },
-  { name: "React", role: "Interface" },
-  { name: "React Native", role: "Mobile apps" },
-  { name: "Next.js", role: "Framework" },
-  { name: "GSAP", role: "Motion" },
-  // the top slab is the yellow one: the newest layer, crowning the stack
-  { name: "Gen AI", role: "LLMs · Agents · RAG" },
-];
+// the deck only needs the picture and its name; the full entries are on /artworks
+const DECK = PROJECTS.map((p) => ({ src: p.src, alt: p.name }));
 
 export default function Home() {
   return (
@@ -59,9 +38,9 @@ export default function Home() {
           <div className="menubar">
             <ul className="menulist">
               <li className="menuitem"><a href="/about">About</a></li>
-              <li className="menuitem"><a href="#artworks">Artworks</a></li>
-              <li className="menuitem"><a href="#stack">Stack</a></li>
-              <li><a href="#contact" className="menuitem talk">Let&apos;s Talk</a></li>
+              <li className="menuitem"><a href="/artworks">Artworks</a></li>
+              <li className="menuitem"><a href="/stack">Stack</a></li>
+              <li><a href="/lets-talk" className="menuitem talk">Let&apos;s Talk</a></li>
             </ul>
           </div>
         </nav>
@@ -87,11 +66,11 @@ export default function Home() {
 
       <section className="artwork" id="artworks">
         <p className="stack-caption reveal">Selected Work <span>Things I&apos;ve designed and built.</span></p>
-        <TumbleDeckShowcase cards={PROJECTS} height="100vh" clickOnly ariaLabel="Selected projects" />
+        <TumbleDeckShowcase cards={DECK} height="100vh" clickOnly ariaLabel="Selected projects" />
         <span className="deck-hint" aria-hidden="true"></span>
       </section>
 
-      {/* Exploded-view tower: bottom layer first. Edit STACK to change the tech. */}
+      {/* Exploded-view tower: bottom layer first. Edit STACK (stackData.js) to change the tech. */}
       <section className="stack" id="stack">
         <p className="stack-caption reveal">The Stack <span>What I build with, layer by layer.</span></p>
         <p className="stack-bg" aria-hidden="true">Stack</p>

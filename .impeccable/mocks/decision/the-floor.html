@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Floor</title>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1440px; height: 900px; overflow: hidden; background: #fff; color: #000; font-family: system-ui, sans-serif; position: relative; }
+.mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #777; }
+nav { position: absolute; left: 128px; right: 128px; top: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; z-index: 3; }
+.logo { width: 56px; height: 56px; border-radius: 50%; border: 1.5px solid #000; }
+nav ul { display: flex; gap: 32px; list-style: none; align-items: center; }
+.talk { background: #000; color: #fff; border-radius: 12px; padding: 12px 18px; }
+/* the title runs the full width, like CREATIVE in the hero */
+h1 { position: absolute; left: 120px; top: 70px; font-family: Antonio, sans-serif; font-weight: 500; font-size: 330px; line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em; white-space: nowrap; }
+h1 i { display: inline-block; width: 46px; height: 46px; border-radius: 50%; background: #ffd632; margin-left: 12px; }
+.lede { position: absolute; left: 128px; top: 400px; width: 340px; font-size: 20px; line-height: 1.45; color: #333; z-index: 2; }
+.note { position: absolute; left: 128px; bottom: 56px; z-index: 2; }
+/* the floor: one perspective, cards lying flat where they fell */
+.floor { position: absolute; left: 0; right: 0; top: 330px; bottom: 0; perspective: 1500px; perspective-origin: 50% -40%; }
+.plane { position: absolute; left: 50%; top: 0; width: 1500px; height: 900px; margin-left: -750px; transform: rotateX(64deg); transform-origin: 50% 0; transform-style: preserve-3d; }
+.card { position: absolute; width: 400px; height: 194px; background: #ececec; box-shadow: 0 0 0 1px rgba(0,0,0,0.25); transform-style: preserve-3d; }
+.card b { position: absolute; left: 8%; top: 16%; width: 44%; height: 12%; background: #000; }
+.card u { position: absolute; left: 8%; top: 38%; width: 28%; height: 7%; background: #bbb; }
+.card s { position: absolute; right: 7%; bottom: 12%; width: 36%; height: 58%; background: #d4d4d4; }
+.card em { position: absolute; left: 0; bottom: -30px; font: 500 20px ui-monospace, Menlo, monospace; font-style: normal; letter-spacing: 0.15em; color: #000; }
+.c1 { left: 560px; top: 90px; transform: rotate(-7deg); }
+.c2 { left: 1010px; top: 40px; transform: rotate(9deg); }
+.c3 { left: 300px; top: 390px; transform: rotate(5deg); }
+.c4 { left: 880px; top: 380px; transform: rotate(-12deg); }
+.c5 { left: 1180px; top: 560px; transform: rotate(4deg); }
+/* the nearest card is already lifting on its bottom edge, the reverse of the homepage drop */
+.c6 { left: 600px; top: 640px; transform: rotateX(-52deg); transform-origin: 50% 100%; box-shadow: 0 0 0 1.5px #000; background: #f6f6f6; }
+.shadow { position: absolute; left: 600px; top: 640px; width: 400px; height: 194px; background: rgba(0,0,0,0.08); }
+/* the first plate's label, pinned to the lifting card */
+.tag { position: absolute; right: 128px; bottom: 56px; text-align: right; z-index: 2; }
+.tag h2 { font-family: Antonio, sans-serif; font-weight: 500; font-size: 96px; line-height: 0.9; text-transform: uppercase; }
+.tag h2::before { content: ""; display: inline-block; width: 18px; height: 18px; border-radius: 50%; background: #ffd632; margin-right: 14px; vertical-align: middle; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo"></div>
+  <ul><li>About</li><li>Artworks</li><li>Stack</li><li class="talk">Let's Talk</li></ul>
+</nav>
+<h1>Artworks<i></i></h1>
+<p class="lede">Six things I designed and built, right where the deck dropped them.</p>
+<p class="mono note">Scroll to pick them up ↓</p>
+<div class="floor">
+  <div class="plane">
+    <div class="card c1"><b></b><u></u><s></s><em>02</em></div>
+    <div class="card c2"><b></b><u></u><s></s><em>05</em></div>
+    <div class="card c3"><b></b><u></u><s></s><em>04</em></div>
+    <div class="card c4"><b></b><u></u><s></s><em>03</em></div>
+    <div class="card c5"><b></b><u></u><s></s><em>06</em></div>
+    <div class="shadow"></div>
+    <div class="card c6"><b></b><u></u><s></s></div>
+  </div>
+</div>
+<div class="tag">
+  <span class="mono">01 · AI product · Sample</span>
+  <h2>Paperhand</h2>
+</div>
+</body>
+</html>

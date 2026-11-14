@@ -5,12 +5,28 @@ import { useEffect, useRef, useState } from "react";
 // Formspree form id (formspree.io -> New form). Set NEXT_PUBLIC_FORMSPREE_ID in .env.local.
 const FORM_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID;
 
-const MESSAGES = {
+export const MESSAGES = {
   sending: "Sending…",
   sent: "Sent. Talk soon.",
   error: "Something went wrong. Please try again.",
   unconfigured: "This form isn't connected yet. Your message was not sent.",
 };
+
+// Shared by both contact forms (home and /lets-talk). Returns the status to show; never
+// pretends to send: without a form id it reports "unconfigured" and sends nothing.
+export async function sendBrief(form) {
+  if (!FORM_ID) return "unconfigured";
+  try {
+    const res = await fetch(`https://formspree.io/f/${FORM_ID}`, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { Accept: "application/json" },
+    });
+    return res.ok ? "sent" : "error";
+  } catch {
+    return "error";
+  }
+}
 
 // Each blank is exactly as wide as its text (or placeholder), measured in its own font:
 // `ch` overshoots badly in this condensed face.
@@ -74,22 +90,13 @@ export default function ContactForm() {
   async function onSubmit(e) {
     e.preventDefault();
     const form = e.currentTarget;
-    // Never pretend to send: without a form id, keep what they typed and say so.
-    if (!FORM_ID) return setStatus("unconfigured");
     setStatus("sending");
-    try {
-      const res = await fetch(`https://formspree.io/f/${FORM_ID}`, {
-        method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" },
-      });
-      if (!res.ok) throw new Error(`Formspree ${res.status}`);
+    const next = await sendBrief(form);
+    if (next === "sent") {
       form.reset(); // clear only once the message is safely delivered
       fitSentence(form);
-      setStatus("sent");
-    } catch {
-      setStatus("error");
     }
+    setStatus(next);
   }
 
   return (

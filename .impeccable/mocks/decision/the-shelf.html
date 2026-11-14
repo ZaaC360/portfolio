@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Shelf</title>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1440px; height: 900px; overflow: hidden; background: #fff; color: #000; font-family: system-ui, sans-serif; position: relative; }
+.mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; }
+nav { position: absolute; left: 128px; right: 128px; top: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; }
+.logo { width: 56px; height: 56px; border-radius: 50%; border: 1.5px solid #000; }
+nav ul { display: flex; gap: 32px; list-style: none; align-items: center; }
+.talk { background: #000; color: #fff; border-radius: 12px; padding: 12px 18px; }
+.bar { position: absolute; left: 128px; right: 128px; top: 100px; display: flex; justify-content: space-between; color: #777; }
+/* the shelf: ten spines edge to edge, one pulled open */
+.shelf { position: absolute; left: 0; right: 0; top: 136px; bottom: 0; display: flex; list-style: none; background: #000; }
+.spine { width: 86px; flex: none; background: #000; color: #fff; border-right: 1px solid #3a3a3a; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 22px 0; }
+.spine .mono { color: #8a8a8a; }
+.spine b { writing-mode: vertical-rl; transform: rotate(180deg); font-family: Antonio, sans-serif; font-weight: 500; font-size: 56px; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+.spine i { width: 10px; height: 10px; border-radius: 50%; border: 1px solid #8a8a8a; }
+.spine.ai { background: #ffd632; color: #000; }
+.spine.ai .mono { color: #000; }
+.spine.ai i { background: #000; border-color: #000; }
+.spine.on { background: #1c1c1c; }
+.spine.on i { background: #ffd632; border-color: #ffd632; }
+/* the open page */
+.page { flex: 1; background: #fff; color: #000; padding: 44px 56px; position: relative; }
+.page .mono { color: #777; }
+.page h1 { margin-top: 18px; font-family: Antonio, sans-serif; font-weight: 500; font-size: 250px; line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em; }
+.page h1 i { display: inline-block; width: 34px; height: 34px; border-radius: 50%; background: #ffd632; margin-left: 10px; }
+.page .lede { margin-top: 28px; max-width: 420px; font-size: 22px; line-height: 1.45; color: #333; }
+.facts { position: absolute; left: 56px; right: 56px; bottom: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; border-top: 1px solid #000; padding-top: 18px; }
+.facts p { margin-top: 8px; font-size: 16px; line-height: 1.5; color: #444; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo"></div>
+  <ul><li>About</li><li>Artworks</li><li>Stack</li><li class="talk">Let's Talk</li></ul>
+</nav>
+<div class="bar"><p class="mono">The Stack · Ten layers on a shelf</p><p class="mono">Pull one out →</p></div>
+<ol class="shelf">
+  <li class="spine"><span class="mono">01</span><b>PostgreSQL</b><i></i></li>
+  <li class="spine"><span class="mono">02</span><b>MongoDB</b><i></i></li>
+  <li class="spine"><span class="mono">03</span><b>Node.js</b><i></i></li>
+  <li class="spine"><span class="mono">04</span><b>Express</b><i></i></li>
+  <li class="spine"><span class="mono">05</span><b>TypeScript</b><i></i></li>
+  <li class="spine on"><span class="mono">06</span><b>React</b><i></i></li>
+  <li class="page">
+    <p class="mono">Layer 06 of 10 · Interface</p>
+    <h1>React<i></i></h1>
+    <p class="lede">Where the product meets a person: every screen, state and interaction is a component.</p>
+    <div class="facts">
+      <div><span class="mono">I reach for it when</span><p>An interface has real state: dashboards, forms, anything that changes while you look at it.</p></div>
+      <div><span class="mono">Sits between</span><p>TypeScript below it, Next.js and React Native above it.</p></div>
+    </div>
+  </li>
+  <li class="spine"><span class="mono">07</span><b>React Native</b><i></i></li>
+  <li class="spine"><span class="mono">08</span><b>Next.js</b><i></i></li>
+  <li class="spine"><span class="mono">09</span><b>GSAP</b><i></i></li>
+  <li class="spine ai"><span class="mono">10</span><b>Gen AI</b><i></i></li>
+</ol>
+</body>
+</html>

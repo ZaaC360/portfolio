@@ -11,6 +11,42 @@
         ],
         "createdAt": "2026-11-08T07:43:48.877Z",
         "reason": "Claude: src is assigned in paint() as pooled card slots recycle; never rendered without a src"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/flat-file.html"
+        ],
+        "createdAt": "2026-11-14T11:56:56.288Z",
+        "reason": "Claude: throwaway decision sketch, not shipping UI; drawer text is vertically centred in a 62px grid row and the open drawer's children are absolutely positioned 22px in, which the static check cannot see"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "antonio",
+        "files": [
+          ".impeccable/mocks/decision/contact-sheet.html"
+        ],
+        "createdAt": "2026-11-14T15:03:28.416Z",
+        "reason": "Claude: decision sketch, not shipping UI; the sketch format allows only Google Fonts, so Antonio stands in for the self-hosted title face"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "antonio",
+        "files": [
+          ".impeccable/mocks/decision/the-floor.html"
+        ],
+        "createdAt": "2026-11-14T15:03:29.780Z",
+        "reason": "Claude: decision sketch, not shipping UI; the sketch format allows only Google Fonts, so Antonio stands in for the self-hosted title face"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "antonio",
+        "files": [
+          ".impeccable/mocks/decision/flat-file.html"
+        ],
+        "createdAt": "2026-11-14T15:03:31.361Z",
+        "reason": "Claude: decision sketch, not shipping UI; the sketch format allows only Google Fonts, so Antonio stands in for the self-hosted title face"
       }
     ]
   }

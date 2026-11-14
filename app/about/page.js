@@ -39,9 +39,9 @@ export default function About() {
           <div className="menubar">
             <ul className="menulist">
               <li className="menuitem"><a href="/about" aria-current="page">About</a></li>
-              <li className="menuitem"><a href="/#artworks">Artworks</a></li>
-              <li className="menuitem"><a href="/#stack">Stack</a></li>
-              <li><a href="/#contact" className="menuitem talk">Let&apos;s Talk</a></li>
+              <li className="menuitem"><a href="/artworks">Artworks</a></li>
+              <li className="menuitem"><a href="/stack">Stack</a></li>
+              <li><a href="/lets-talk" className="menuitem talk">Let&apos;s Talk</a></li>
             </ul>
           </div>
         </nav>

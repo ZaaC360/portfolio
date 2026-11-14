@@ -12,12 +12,12 @@ import { useEffect, useRef } from "react";
  */
 
 // cropped from the 21st.dev HandArt preview: light hands on black, arms running off both edges
-const SRC = "/imgs/hands.png";
+export const SRC = "/imgs/hands.png";
 // strict rotation about the box centre: same size, same box; at 15deg the hands stay inside it
-const TILT = (15 * Math.PI) / 180;
+export const TILT = (15 * Math.PI) / 180;
 // phones: a square band and a steeper diagonal, so the whole composition (both arms) fits
 // corner to corner instead of the arms being cropped off the narrow screen
-const TILT_PHONE = (40 * Math.PI) / 180;
+export const TILT_PHONE = (40 * Math.PI) / 180;
 const CONTRAST = 1.15;
 const EDGE = 0.4;
 const FPS = 12;
@@ -29,6 +29,58 @@ const smooth = (a, b, x) => {
   const t = clamp01((x - a) / (b - a));
   return t * t * (3 - 2 * t);
 };
+
+// Image pixels (one per cell) -> per-cell brightness of the hands, 0 = backdrop:
+// key out the black, auto-levels + contrast over the hands, then Sobel edge emphasis.
+export function toneOf(px, cols, rows) {
+  const n = cols * rows;
+  const raw = new Float32Array(n);
+  const keep = new Float32Array(n);
+  const seen = [];
+  for (let i = 0; i < n; i++) {
+    raw[i] = (0.2126 * px[i * 4] + 0.7152 * px[i * 4 + 1] + 0.0722 * px[i * 4 + 2]) / 255;
+    // near-black is backdrop; anything lighter is hand
+    keep[i] = smooth(0.05, 0.16, raw[i]);
+    if (keep[i] > 0.5) seen.push(raw[i]);
+  }
+  // auto-levels over the hands only, then contrast 115
+  seen.sort((a, b) => a - b);
+  const lo = seen[Math.floor(seen.length * 0.03)] ?? 0;
+  const hi = seen[Math.floor(seen.length * 0.98)] ?? 1;
+  const base = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    base[i] = keep[i] * clamp01(((raw[i] - lo) / Math.max(0.05, hi - lo) - 0.5) * CONTRAST + 0.5);
+  }
+  // edge emphasis 40: Sobel on the cell grid sharpens fingers against the black
+  const tone = new Float32Array(n);
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const at = (dx, dy) => base[Math.min(rows - 1, Math.max(0, y + dy)) * cols + Math.min(cols - 1, Math.max(0, x + dx))];
+      const gx = at(1, -1) + 2 * at(1, 0) + at(1, 1) - at(-1, -1) - 2 * at(-1, 0) - at(-1, 1);
+      const gy = at(-1, 1) + 2 * at(0, 1) + at(1, 1) - at(-1, -1) - 2 * at(0, -1) - at(1, -1);
+      const i = y * cols + x;
+      tone[i] = base[i] ? clamp01(base[i] + Math.hypot(gx, gy) * EDGE * 0.15) : 0;
+    }
+  }
+  return tone;
+}
+
+// Ordered dither: a cell lights up when its tone beats the Bayer threshold (nudged by
+// jitter each frame for the shimmer), grey by tone; transparent elsewhere so CSS glow
+// outlines the hands, not the box.
+export function dither(out, tone, cols, rows, jitter) {
+  const d = out.data;
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const i = y * cols + x;
+      const t = tone[i];
+      const on = t > 0.04 && t > BAYER[(y & 3) * 4 + (x & 3)] * 0.9 + jitter;
+      const v = on ? 110 + 145 * t : 0;
+      d[i * 4] = d[i * 4 + 1] = d[i * 4 + 2] = v;
+      d[i * 4 + 3] = on ? 255 : 0;
+    }
+  }
+}
 
 export default function AsciiFooter() {
   const canvasRef = useRef(null);
@@ -87,53 +139,13 @@ export default function AsciiFooter() {
       sctx.restore();
       const px = sctx.getImageData(0, 0, cols, rows).data;
 
-      const n = cols * rows;
-      const raw = new Float32Array(n);
-      const keep = new Float32Array(n);
-      const seen = [];
-      for (let i = 0; i < n; i++) {
-        raw[i] = (0.2126 * px[i * 4] + 0.7152 * px[i * 4 + 1] + 0.0722 * px[i * 4 + 2]) / 255;
-        // near-black is backdrop; anything lighter is hand
-        keep[i] = smooth(0.05, 0.16, raw[i]);
-        if (keep[i] > 0.5) seen.push(raw[i]);
-      }
-      // auto-levels over the hands only, then contrast 115
-      seen.sort((a, b) => a - b);
-      const lo = seen[Math.floor(seen.length * 0.03)] ?? 0;
-      const hi = seen[Math.floor(seen.length * 0.98)] ?? 1;
-      const base = new Float32Array(n);
-      for (let i = 0; i < n; i++) {
-        base[i] = keep[i] * clamp01(((raw[i] - lo) / Math.max(0.05, hi - lo) - 0.5) * CONTRAST + 0.5);
-      }
-      // edge emphasis 40: Sobel on the cell grid sharpens fingers against the black
-      tone = new Float32Array(n);
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-          const at = (dx, dy) => base[Math.min(rows - 1, Math.max(0, y + dy)) * cols + Math.min(cols - 1, Math.max(0, x + dx))];
-          const gx = at(1, -1) + 2 * at(1, 0) + at(1, 1) - at(-1, -1) - 2 * at(-1, 0) - at(-1, 1);
-          const gy = at(-1, 1) + 2 * at(0, 1) + at(1, 1) - at(-1, -1) - 2 * at(0, -1) - at(1, -1);
-          const i = y * cols + x;
-          tone[i] = base[i] ? clamp01(base[i] + Math.hypot(gx, gy) * EDGE * 0.15) : 0;
-        }
-      }
+      tone = toneOf(px, cols, rows);
       out = sctx.createImageData(cols, rows);
     };
 
-    // Ordered dither: a cell lights up when its tone beats the Bayer threshold (nudged a
-    // little each frame for the shimmer), grey by tone; then scale up as hard pixels.
+    // dither, then scale up as hard pixels
     const frame = () => {
-      const d = out.data;
-      const jitter = reduce ? 0 : (Math.random() - 0.5) * 0.12;
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-          const i = y * cols + x;
-          const t = tone[i];
-          const on = t > 0.04 && t > BAYER[(y & 3) * 4 + (x & 3)] * 0.9 + jitter;
-          const v = on ? 110 + 145 * t : 0;
-          d[i * 4] = d[i * 4 + 1] = d[i * 4 + 2] = v;
-          d[i * 4 + 3] = on ? 255 : 0; // transparent, so the CSS glow outlines the hands, not the box
-        }
-      }
+      dither(out, tone, cols, rows, reduce ? 0 : (Math.random() - 0.5) * 0.12);
       sctx.putImageData(out, 0, 0);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.imageSmoothingEnabled = false;
