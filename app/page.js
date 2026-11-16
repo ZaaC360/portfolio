@@ -64,6 +64,17 @@ export default function Home() {
         <h1> Artistic coder. MERN Specialist.</h1>
       </section>
 
+      {/* Manifesto: Animations.js fills it word by word, outline to solid, as it scrolls past.
+          Placeholder copy: say it in your own words. The last word and the dot stay together. */}
+      <section className="manifesto">
+        <p className="stack-caption reveal">Manifesto <span>What I believe about building things.</span></p>
+        <p className="manifesto-text">
+          I design while I build. How a product moves matters as much as how it works. And the AI I ship
+          runs in production, not in a{" "}
+          <span className="manifesto-end">demo<span className="manifesto-dot" aria-hidden="true"></span></span>
+        </p>
+      </section>
+
       <section className="artwork" id="artworks">
         <p className="stack-caption reveal">Selected Work <span>Things I&apos;ve designed and built.</span></p>
         <TumbleDeckShowcase cards={DECK} height="100vh" clickOnly ariaLabel="Selected projects" />

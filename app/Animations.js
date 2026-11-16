@@ -239,6 +239,14 @@ export default function Animations() {
         scrollTrigger: { trigger: ".about", start: "top top", end: "+=3000", scrub: 2, pin: true, invalidateOnRefresh: true },
       });
 
+      // Manifesto: words go from outline to solid in reading order as the paragraph crosses
+      // the screen; the yellow full stop pops in last. Not pinned: the page has enough pins.
+      const manifesto = document.querySelector(".manifesto-text");
+      gsap
+        .timeline({ defaults: { ease: "none" }, scrollTrigger: { trigger: manifesto, start: "top 80%", end: "bottom 50%", scrub: 1 } })
+        .fromTo(SplitText.create(manifesto, { type: "words" }).words, { color: "#fff", webkitTextStrokeColor: "rgba(0,0,0,0.28)" }, { color: "#000", webkitTextStrokeColor: "rgba(0,0,0,0)", stagger: 0.5 })
+        .from(".manifesto-dot", { scale: 0, ease: "back.out(3)", duration: 1.5 });
+
       // Selected Work: pinned for two screens of scroll, dropping one card at each quarter
       // (3 drops); scrolling back up stands them up again. Clicks still drop extra cards.
       const deck = document.querySelector(".artwork .td-root");

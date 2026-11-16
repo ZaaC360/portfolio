@@ -237,6 +237,51 @@ nav {
     font-weight: 500;
 }
 
+/* ---------- Manifesto: a big statement, filled word by word on scroll (Animations.js) ---------- */
+.manifesto {
+    position: relative; /* for the caption */
+    padding: 24vh 8rem 20vh;
+}
+
+.manifesto-text {
+    max-width: 1500px;
+    font-family: "MyFont";
+    font-weight: 500;
+    font-size: clamp(2.75rem, 6.4vw, 7.5rem);
+    line-height: 1;
+    text-transform: uppercase;
+    /* the outline a word shows before it fills (Animations.js fades its colour in and out).
+       Fill painted over the stroke: an unfilled word is white like the page, which hides the
+       inner half of the stroke and the overlapping contours this variable font has inside
+       A, D, P, R */
+    -webkit-text-stroke: 0.022em transparent; /* 2px at desktop size, thinner on a phone */
+    paint-order: stroke fill;
+}
+
+/* beat the global `* { font-family }` on the word wrappers */
+.manifesto-text * {
+    font-family: inherit;
+}
+
+.manifesto-end {
+    white-space: nowrap; /* the dot never wraps onto a line of its own */
+}
+
+.manifesto-dot {
+    display: inline-block;
+    width: 0.17em;
+    height: 0.17em;
+    margin-left: 0.05em;
+    border-radius: 50%;
+    background: #ffd632;
+}
+
+@media (max-width: 768px) {
+    .manifesto {
+        padding: 18vh 1rem 14vh;
+    }
+}
+
 /* ---------- Let's Talk: "the brief", a fill-in-the-blanks letter ---------- */
 .letsTalk {
     position: relative;
