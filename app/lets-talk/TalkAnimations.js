@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { CustomEase } from "gsap/CustomEase";
+import Lenis from "lenis";
+import { SMOOTH } from "../smoothScroll";
 
 gsap.registerPlugin(SplitText, CustomEase);
 
@@ -24,6 +26,13 @@ export default function TalkAnimations() {
     history.scrollRestoration = "manual";
     scrollTo(0, 0);
 
+    // Lenis smooth scroll on GSAP's ticker, as on the other pages (no ScrollTrigger here to sync)
+    const lenis = new Lenis(SMOOTH);
+    const tick = (time) => lenis.raf(time * 1000);
+    gsap.ticker.add(tick);
+    gsap.ticker.lagSmoothing(0);
+    lenis.stop(); // no scrolling under the curtain
+
     const cleanups = [];
     const ctx = gsap.context(() => {
       // the curtain shrinks into the spark between the fingertips: the page starts at the connection
@@ -43,6 +52,7 @@ export default function TalkAnimations() {
           { clipPath: `circle(${spark.width / 2}px at ${cx}px ${cy}px)`, duration: 1.15, ease: "expo.inOut" }
         )
         .set(curtain, { display: "none" })
+        .call(() => lenis.start())
         .fromTo(".gap-spark", { scale: 1.8 }, { scale: 1, duration: 0.9, ease: "elastic.out(1, 0.35)" }, 1.15)
         .to(title.chars, { yPercent: 0, scaleY: 1, duration: 1.1, stagger: 0.022, ease: "lt-snap" }, 1.2)
         .to([".gap-lede", ".gap-status li"], { opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: "power3.out" }, 1.6)
@@ -77,6 +87,8 @@ export default function TalkAnimations() {
     return () => {
       cleanups.forEach((fn) => fn());
       ctx.revert();
+      gsap.ticker.remove(tick);
+      lenis.destroy();
     };
   }, []);
 

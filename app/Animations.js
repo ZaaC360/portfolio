@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import Lenis from "lenis";
+import { SMOOTH } from "./smoothScroll";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -78,7 +79,7 @@ export default function Animations() {
 
     // Lenis smooth scroll, driven by GSAP's ticker so ScrollTrigger stays in sync.
     // anchors: nav links (#about, #contact...) glide instead of jumping.
-    const lenis = new Lenis({ anchors: true });
+    const lenis = new Lenis({ ...SMOOTH, anchors: true });
     lenis.on("scroll", ScrollTrigger.update);
     const tick = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(tick);

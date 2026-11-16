@@ -7,6 +7,7 @@ import { SplitText } from "gsap/SplitText";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 import { CustomEase } from "gsap/CustomEase";
 import Lenis from "lenis";
+import { SMOOTH } from "../smoothScroll";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin, CustomEase);
 
@@ -33,7 +34,7 @@ export default function StackAnimations() {
     history.scrollRestoration = "manual";
     scrollTo(0, 0);
 
-    const lenis = new Lenis();
+    const lenis = new Lenis(SMOOTH);
     lenis.on("scroll", ScrollTrigger.update);
     const tick = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(tick);
