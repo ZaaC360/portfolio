@@ -34,7 +34,7 @@ export default function LetsTalk() {
               <li><span className="gap-pulse" aria-hidden="true"></span>Open to new projects</li>
               <li>Remote · any timezone</li>
               <li>
-                Code first? <a href="https://github.com/ZaaC360" target="_blank" rel="noreferrer">GitHub ↗</a>
+                Code first? <a href="https://github.com/ZaaC360" target="_blank" rel="noreferrer">GitHub</a>
               </li>
             </ul>
           </div>

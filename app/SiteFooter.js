@@ -36,7 +36,7 @@ export default function SiteFooter() {
         </nav>
         <div className="footer-col reveal">
           <p className="footer-label">Elsewhere</p>
-          <a href="https://github.com/ZaaC360" className="footer-link" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href="https://github.com/ZaaC360" className="footer-link" target="_blank" rel="noreferrer">GitHub</a>
         </div>
         <div className="footer-col reveal">
           <p className="footer-label">Currently</p>

@@ -79,7 +79,7 @@ export default function Artworks() {
                     <div><dt>Stack</dt><dd>{p.stack.join(" · ")}</dd></div>
                   </dl>
                   {p.url && (
-                    <a href={p.url} className="aw-visit" target="_blank" rel="noreferrer">Visit {p.name} ↗</a>
+                    <a href={p.url} className="aw-visit" target="_blank" rel="noreferrer">Visit {p.name}</a>
                   )}
                 </div>
               </div>
