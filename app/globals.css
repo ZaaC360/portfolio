@@ -2841,7 +2841,8 @@ h2.sk-fit {
 .aw-tile-card img,
 .aw-card img {
     display: block;
-    width: 100%;
+    width: 101.3%; /* shortcut: trims the browser scrollbar caught in the screenshots; back to 100% once they are re-shot without it */
+    max-width: none;
     height: 100%;
     object-fit: cover;
     object-position: 50% 0%;
@@ -3061,6 +3062,7 @@ h2.sk-fit {
 
     .aw-name {
         font-size: clamp(56px, 17vw, 120px);
+        white-space: normal; /* a long name takes two lines rather than running off a phone */
     }
 
     .aw-body,

@@ -315,7 +315,8 @@ export default function TumbleDeckShowcase({
         }
         .td-card { cursor: pointer; }
         .td-card img {
-          display: block; width: 100%; height: 100%; max-width: none;
+          /* shortcut: 101.3% trims the browser scrollbar caught in the screenshots; back to 100% once they are re-shot */
+          display: block; width: 101.3%; height: 100%; max-width: none;
           object-fit: cover; object-position: 50% 0%; pointer-events: none;
         }
         .td-card::after {

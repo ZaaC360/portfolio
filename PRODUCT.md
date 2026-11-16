@@ -21,7 +21,8 @@ A developer who designs while building: MERN, Next.js and React Native apps with
 - Confirmed statements: open to new projects; works remotely across timezones.
 
 ## Evidence on Hand
-- Project screenshots are Unsplash placeholders; About numbers and timeline are placeholder copy.
+- Projects (app/projectData.js) are real, live sites with their own screenshots: Cardevo, Meeti, Shoe Castle, Rank Empire, Celestial Hair & Co. Each entry's stack is what the live site runs on; years and client details are not recorded, so do not state them.
+- About numbers and timeline are placeholder copy.
 - No testimonials, client names, pricing or response-time promises exist: never invent them.
 
 ## Brand Commitments

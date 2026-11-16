@@ -103,7 +103,7 @@ export default function ArtworksAnimations() {
         plate.querySelectorAll(".aw-facts dt, .aw-caption span:last-child").forEach((el, k) => {
           tl.to(el, { duration: 0.8, scrambleText: { text: el.textContent, chars: "upperCase", speed: 0.5 } }, 0.5 + k * 0.07);
         });
-        plate.querySelectorAll(".aw-facts div:first-child dd, .aw-caption span:first-child").forEach((el) => {
+        plate.querySelectorAll(".aw-year, .aw-caption span:first-child").forEach((el) => {
           tl.to(el, { duration: 0.9, scrambleText: { text: el.textContent, chars: DIGITS, speed: 0.5 } }, 0.5);
         });
       });

@@ -7,8 +7,6 @@ export const metadata = { title: "Artworks · Zaac" };
 
 const no = (i) => String(i + 1).padStart(2, "0");
 const COUNT = no(PROJECTS.length - 1);
-// while any entry is a sample the page says so up front; it only claims the work once it is real
-const SAMPLES = PROJECTS.some((p) => p.sample);
 // the line never shows a gap: enough copies of the projects to outrun the widest screen (18 cards)
 const LINE = Array.from({ length: Math.ceil(18 / PROJECTS.length) }, () => PROJECTS).flat();
 
@@ -41,7 +39,7 @@ export default function Artworks() {
           <h1 className="aw-title">Artworks<span className="ab-dot" aria-hidden="true"></span></h1>
           <div className="aw-side">
             <p className="aw-lede">
-              {PROJECTS.length} {SAMPLES ? "sample builds" : "things I designed and built"}, filing past.
+              {PROJECTS.length} things I designed and built, filing past.
             </p>
             <p className="aw-hint">Pick one, or scroll ↓</p>
           </div>
@@ -71,12 +69,12 @@ export default function Artworks() {
               <h2 className="aw-name" id={`work-${no(i)}`}>{p.name}</h2>
               <div className="aw-body">
                 <div className="aw-stage">
-                  <div className="aw-card"><img src={p.src} alt={p.sample ? "" : `${p.name} screenshot`} loading="lazy" /></div>
+                  <div className="aw-card"><img src={p.src} alt={`${p.name} screenshot`} loading="lazy" /></div>
                 </div>
                 <div className="aw-info">
                   <p className="aw-does">{p.does}</p>
                   <dl className="aw-facts">
-                    <div><dt>Year</dt><dd>{p.year}</dd></div>
+                    {p.year && <div><dt>Year</dt><dd className="aw-year">{p.year}</dd></div>}
                     <div><dt>Platform</dt><dd>{p.platform}</dd></div>
                     <div><dt>Stack</dt><dd>{p.stack.join(" · ")}</dd></div>
                   </dl>
@@ -87,7 +85,7 @@ export default function Artworks() {
               </div>
               <p className="aw-caption">
                 <span>{no(i)} / {COUNT}</span>
-                <span>{p.type}{p.sample && " · Sample"}</span>
+                <span>{p.type}</span>
               </p>
             </li>
           ))}
